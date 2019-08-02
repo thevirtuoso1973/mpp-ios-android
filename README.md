@@ -14,6 +14,9 @@ Every step of the tutorial is included into the repository as branch. You may ch
 - `step-003` - create `SharedCode` multiplatfrorm project in Gradle
 - `step-004` - add source code to the `SharedCode` project
 - `step-005` - use `SharedCode` from Android app
+- `step-006` - create Xcode iOS project
+- `step-007` - add Kotlin/Native built framework to the iOS project in Xcode
+- `step-008` - call Kotlin code from Swift
 
 
 ## Running
