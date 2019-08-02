@@ -32,7 +32,7 @@ kotlin {
 }
 
 
-val packForXCode by tasks.creating(Sync::class) {
+val packForXcode by tasks.creating(Sync::class) {
     group = "build"
 
     //selecting the right configuration for the iOS framework depending on the Xcode environment variables
@@ -53,4 +53,4 @@ val packForXCode by tasks.creating(Sync::class) {
     }
 }
 
-tasks.getByName("build").dependsOn(packForXCode)
+tasks.getByName("build").dependsOn(packForXcode)
