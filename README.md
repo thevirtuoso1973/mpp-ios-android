@@ -3,7 +3,7 @@
 
 # Kotlin Multiplafrorm projects: Sharing code between iOS and Android
 
-The core repository for the https://kotlinlang.org/docs/tutorials/native/mpp-ios-android.html tutorial
+The core repository for the https://play.kotlinlang.org/hands-on/Targeting%20iOS%20and%20Android%20with%20Kotlin%20Multiplatform tutorial
 
 ## Branches
 
