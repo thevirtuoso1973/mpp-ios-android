@@ -1,7 +1,7 @@
 [![official JetBrains project](https://jb.gg/badges/official.svg)](https://confluence.jetbrains.com/display/ALL/JetBrains+on+GitHub)
 [![GitHub license](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](https://www.apache.org/licenses/LICENSE-2.0)
 
-# Kotlin Multiplafrorm projects: Sharing code between iOS and Android
+# Kotlin Multiplatform projects: Sharing code between iOS and Android
 
 The core repository for the https://play.kotlinlang.org/hands-on/Targeting%20iOS%20and%20Android%20with%20Kotlin%20Multiplatform/01_Introduction tutorial
 
