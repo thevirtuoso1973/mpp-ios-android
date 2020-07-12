@@ -3,7 +3,8 @@
 
 # Kotlin Multiplatform projects: Sharing code between iOS and Android
 
-The core repository for [this tutorial](https://play.kotlinlang.org/hands-on/Targeting%20iOS%20and%20Android%20with%20Kotlin%20Multiplatform/01_Introduction).
+The initial work is forked from the GitHub repo of [this tutorial](https://play.kotlinlang.org/hands-on/Targeting%20iOS%20and%20Android%20with%20Kotlin%20Multiplatform/01_Introduction). This repo includes changes to the app structure and gradle build.
+
 
 ## Running
 
