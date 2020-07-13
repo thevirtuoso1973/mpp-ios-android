@@ -25,5 +25,7 @@ class ApplicationPresenter: ApplicationContract.Presenter() {
             return
         }
         view.openLink(getFullUrl(stationFrom, stationTo))
+        val ApiUrl = ApiUrlBuilder(stationFrom, stationTo).build()
+        view.createAlert("Fetching API from $ApiUrl")
     }
 }
