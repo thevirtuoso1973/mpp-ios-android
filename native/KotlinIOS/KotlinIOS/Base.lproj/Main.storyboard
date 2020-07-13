@@ -16,54 +16,49 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bvm-TJ-sDP">
-                                <rect key="frame" x="10" y="44" width="394" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="First Station" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TDa-WC-Wnt">
+                                <rect key="frame" x="19" y="70" width="92" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ooy-Gg-0KB">
-                                <rect key="frame" x="60" y="129" width="294" height="153"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ktU-KD-1Nr">
+                                <rect key="frame" x="47" y="369" width="320" height="216"/>
                             </pickerView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="First Station" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TDa-WC-Wnt">
-                                <rect key="frame" x="20" y="100" width="374" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Second Station" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3IR-3f-2eU">
+                                <rect key="frame" x="19" y="340" width="117" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ktU-KD-1Nr">
-                                <rect key="frame" x="60" y="319" width="294" height="153"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            </pickerView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Second Station" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3IR-3f-2eU">
-                                <rect key="frame" x="20" y="290" width="374" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gIg-JY-WSI">
-                                <rect key="frame" x="125" y="480" width="164" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gIg-JY-WSI">
+                                <rect key="frame" x="182.5" y="593" width="49" height="30"/>
                                 <state key="normal" title="Submit"/>
                                 <connections>
                                     <action selector="submitButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="PNT-qJ-zZ0"/>
                                 </connections>
                             </button>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ooy-Gg-0KB">
+                                <rect key="frame" x="47" y="99" width="320" height="216"/>
+                            </pickerView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="Bvm-TJ-sDP" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="0EO-4s-M6m"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Bvm-TJ-sDP" secondAttribute="trailing" constant="10" id="XX7-VF-lgy"/>
-                            <constraint firstItem="Bvm-TJ-sDP" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="pPU-3m-Yf2"/>
+                            <constraint firstItem="ktU-KD-1Nr" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="3gT-RP-85h"/>
+                            <constraint firstItem="TDa-WC-Wnt" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="26" id="GVJ-PZ-2Ip"/>
+                            <constraint firstItem="gIg-JY-WSI" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="OLg-sE-wX6"/>
+                            <constraint firstItem="TDa-WC-Wnt" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="19" id="UPI-1z-vmt"/>
+                            <constraint firstItem="gIg-JY-WSI" firstAttribute="top" secondItem="ktU-KD-1Nr" secondAttribute="bottom" constant="8" id="ckr-fv-yOn"/>
+                            <constraint firstItem="Ooy-Gg-0KB" firstAttribute="top" secondItem="TDa-WC-Wnt" secondAttribute="bottom" constant="8" id="dUu-cu-MIm"/>
+                            <constraint firstItem="ktU-KD-1Nr" firstAttribute="top" secondItem="3IR-3f-2eU" secondAttribute="bottom" constant="8" id="j0X-eV-Bu1"/>
+                            <constraint firstItem="3IR-3f-2eU" firstAttribute="top" secondItem="Ooy-Gg-0KB" secondAttribute="bottom" constant="25" id="lDX-ac-NTy"/>
+                            <constraint firstItem="3IR-3f-2eU" firstAttribute="leading" secondItem="TDa-WC-Wnt" secondAttribute="leading" id="s2C-Wc-Ghw"/>
+                            <constraint firstItem="Ooy-Gg-0KB" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="wI1-Iw-2Pg"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="firstStationPicker" destination="Ooy-Gg-0KB" id="EQJ-E7-P6i"/>
-                        <outlet property="label" destination="Bvm-TJ-sDP" id="0K4-VH-gLR"/>
                         <outlet property="secondStationPicker" destination="ktU-KD-1Nr" id="nre-dJ-Gj5"/>
                         <outlet property="submitButton" destination="gIg-JY-WSI" id="Kzw-Au-w2M"/>
                     </connections>

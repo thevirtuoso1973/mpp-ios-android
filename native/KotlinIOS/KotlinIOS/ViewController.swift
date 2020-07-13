@@ -26,8 +26,6 @@ class PickerDelegate: NSObject, UIPickerViewDelegate, UIPickerViewDataSource {
 }
 
 class ViewController: UIViewController {
-
-    @IBOutlet private var label: UILabel!
     @IBOutlet private var firstStationPicker: UIPickerView!
     @IBOutlet private var secondStationPicker: UIPickerView!
     @IBOutlet private var submitButton: UIButton!
@@ -58,9 +56,6 @@ extension ViewController: ApplicationContractView {
         stationPickerDelegate.setPickerOptions(newOptions: newStations)
     }
     
-    func setLabel(text: String) {
-        label.text = text
-    }
     func setStations(stations: Array<String>) {
         stationPickerDelegate.setPickerOptions(newOptions: stations)
     }
