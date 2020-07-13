@@ -18,6 +18,9 @@ class ApplicationPresenter: ApplicationContract.Presenter() {
     }
 
     override fun onSubmitPressed(view: ApplicationContract.View) {
-        view.openLink(getFullUrl(view.getStationFrom(), view.getStationTo()))
+        val stations = getStations()
+        val stationFrom = stations[view.getStationFrom()]
+        val stationTo = stations[view.getStationTo()]
+        view.openLink(getFullUrl(stationFrom, stationTo))
     }
 }

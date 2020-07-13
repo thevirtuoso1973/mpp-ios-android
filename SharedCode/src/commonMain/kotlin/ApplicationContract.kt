@@ -5,8 +5,8 @@ import kotlinx.coroutines.CoroutineScope
 interface ApplicationContract {
     interface View {
         fun setStations(stations: Array<String>)
-        fun getStationFrom(): String
-        fun getStationTo(): String
+        fun getStationFrom(): Int
+        fun getStationTo(): Int
         fun openLink(link: String)
     }
 

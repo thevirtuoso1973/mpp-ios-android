@@ -32,14 +32,14 @@ class MainActivity : AppCompatActivity(), ApplicationContract.View {
         spinnerTo.adapter = arrayAdapter
     }
 
-    override fun getStationFrom(): String {
+    override fun getStationFrom(): Int {
         val spinner: Spinner = findViewById(R.id.spinner_from)
-        return spinner.selectedItem.toString()
+        return spinner.selectedItemPosition
     }
 
-    override fun getStationTo(): String {
+    override fun getStationTo(): Int {
         val spinner: Spinner = findViewById(R.id.spinner_to)
-        return spinner.selectedItem.toString()
+        return spinner.selectedItemPosition
     }
 
     override fun openLink(link: String) {
