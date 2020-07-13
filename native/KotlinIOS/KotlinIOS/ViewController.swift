@@ -48,15 +48,24 @@ class ViewController: UIViewController {
 }
 
 extension ViewController: ApplicationContractView {
+    func getStationFrom() -> Int32 {
+        return Int32(firstStationPicker.selectedRow(inComponent: 0))
+    }
+    
+    func getStationTo() -> Int32 {
+        return Int32(secondStationPicker.selectedRow(inComponent: 0))
+    }
+    
+    func openLink(link: String) {	
+        print("TODO: Open link")
+        print(link)
+    }
+    
     func setStations(stations: KotlinArray) {
         var newStations : Array<String> = []
         for i in 0..<stations.size {
             newStations.append(stations.get(index: i) as! String)
         }
         stationPickerDelegate.setPickerOptions(newOptions: newStations)
-    }
-    
-    func setStations(stations: Array<String>) {
-        stationPickerDelegate.setPickerOptions(newOptions: stations)
     }
 }
