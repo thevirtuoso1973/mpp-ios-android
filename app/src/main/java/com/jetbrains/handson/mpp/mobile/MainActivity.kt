@@ -1,17 +1,23 @@
 package com.jetbrains.handson.mpp.mobile
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity(), ApplicationContract.View {
+    private val presenter = ApplicationPresenter()
+
+    fun notifyPresenterSubmit(view: View) {
+        presenter.onSubmitPressed(this)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val presenter = ApplicationPresenter()
         presenter.onViewTaken(this)
     }
 
@@ -24,5 +30,19 @@ class MainActivity : AppCompatActivity(), ApplicationContract.View {
         val spinnerTo: Spinner = findViewById(R.id.spinner_to)
         spinnerFrom.adapter = arrayAdapter
         spinnerTo.adapter = arrayAdapter
+    }
+
+    override fun getStationFrom(): String {
+        val spinner: Spinner = findViewById(R.id.spinner_from)
+        return spinner.selectedItem.toString()
+    }
+
+    override fun getStationTo(): String {
+        val spinner: Spinner = findViewById(R.id.spinner_to)
+        return spinner.selectedItem.toString()
+    }
+
+    override fun openLink(link: String) {
+        TODO()
     }
 }

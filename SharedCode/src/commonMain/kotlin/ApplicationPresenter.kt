@@ -18,6 +18,6 @@ class ApplicationPresenter: ApplicationContract.Presenter() {
     }
 
     override fun onSubmitPressed(view: ApplicationContract.View) {
-        TODO("Not yet implemented")
+        view.openLink(getFullUrl(view.getStationFrom(), view.getStationTo()))
     }
 }
