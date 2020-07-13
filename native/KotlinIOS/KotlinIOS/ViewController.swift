@@ -56,9 +56,9 @@ extension ViewController: ApplicationContractView {
         return Int32(secondStationPicker.selectedRow(inComponent: 0))
     }
     
-    func openLink(link: String) {	
-        print("TODO: Open link")
-        print(link)
+    func openLink(link: String) {
+        let url = URL(string: link)!
+        UIApplication.shared.open(url)
     }
     
     func setStations(stations: KotlinArray) {
