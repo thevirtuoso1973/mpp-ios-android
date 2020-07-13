@@ -43,6 +43,6 @@ class MainActivity : AppCompatActivity(), ApplicationContract.View {
     }
 
     override fun openLink(link: String) {
-        TODO()
+        startActivity(Intent.parseUri(link, 0))
     }
 }
