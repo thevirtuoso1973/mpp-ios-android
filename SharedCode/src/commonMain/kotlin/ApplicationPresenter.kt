@@ -14,7 +14,7 @@ class ApplicationPresenter: ApplicationContract.Presenter() {
 
     override fun onViewTaken(view: ApplicationContract.View) {
         this.view = view
-        view.setStations(getFullStations())
+        view.setStations(stations)
     }
 
     override fun onSubmitPressed(view: ApplicationContract.View) {

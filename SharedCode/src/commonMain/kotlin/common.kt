@@ -14,10 +14,6 @@ fun getShortStationName(index: Int): String {
     return stations[index].shortName
 }
 
-fun getFullStations(): Array<String> {
-    return stations.map { it.fullName }.toTypedArray()
-}
-
 fun getFullUrl(station_from: String, station_to: String): String {
     return "https://www.lner.co.uk/travel-information/travelling-now/live-train-times/depart/${station_from}/${station_to}"
 }

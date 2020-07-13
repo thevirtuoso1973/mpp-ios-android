@@ -72,7 +72,7 @@ extension ViewController: ApplicationContractView {
     func setStations(stations: KotlinArray) {
         var newStations : Array<String> = []
         for i in 0..<stations.size {
-            newStations.append(stations.get(index: i) as! String)
+            newStations.append((stations.get(index: i) as! Station).fullName)
         }
         stationPickerDelegate.setPickerOptions(newOptions: newStations)
     }
