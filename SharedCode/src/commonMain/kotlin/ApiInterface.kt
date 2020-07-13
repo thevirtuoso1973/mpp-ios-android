@@ -60,31 +60,50 @@ class ApiUrlBuilder(val originStation: String, val destinationStation: String) {
 }
 
 @Serializable
-class ApiResult {
-    val numberOfAdults = 0
-    val numberOfChildren = 0
-    val outboundJourneys = listOf<Journey>()
+data class ApiResult (
+    //val numberOfAdults = 0
+    //val numberOfChildren = 0
+    val outboundJourneys: List<Journey>
+) {
     @Serializable
-    class Journey {
-        val journeyOptionToken = ""
-        val journeyId = ""
-        val originStation = Station()
-        val destinationStation = Station()
-        val departureTime = ""
-        val arrivalTime = ""
-        val status = ""
-        val primaryTrainOperator = TrainOperator()
+    data class Journey (
+        //val journeyOptionToken = ""
+        val journeyId: String,
+        val originStation: Station,
+        val destinationStation: Station,
+        val departureTime: String,
+        val arrivalTime: String,
+        val status: String,
+        val primaryTrainOperator: TrainOperator,
+        val legs: List<Leg>
+    ) {
+        @Serializable
+        data class Station (
+            val displayName: String,
+            val nlc: String,
+            val crs: String
+        )
+        @Serializable
+        data class TrainOperator (
+            val code: String,
+            val name: String
+        )
 
         @Serializable
-        class Station {
-            val displayName = ""
-            val nlc = ""
-            val crs = ""
-        }
-        @Serializable
-        class TrainOperator {
-            val code = ""
-            val name = ""
-        }
+        data class Leg(
+            val legId: String,
+            val rsid: String,
+            val origin: Station,
+            val destination: Station,
+            val type: String,
+            val mode: String, // Enum?
+            val durationInMinutes: Int,
+            val departureDateTime: String,
+            val arrivalDateTime: String,
+            val status: String,
+            val trainOperator: TrainOperator,
+            // val trainFacilities: List<Facility>
+            val additionalFacilitiesInformation: String
+        )
     }
 }
