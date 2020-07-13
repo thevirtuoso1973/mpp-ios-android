@@ -8,6 +8,7 @@ interface ApplicationContract {
         fun getStationFrom(): Int
         fun getStationTo(): Int
         fun openLink(link: String)
+        fun createAlert(msg: String)
     }
 
     abstract class Presenter: CoroutineScope {

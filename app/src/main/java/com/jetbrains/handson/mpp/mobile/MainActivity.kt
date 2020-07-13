@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity(), ApplicationContract.View {
@@ -30,6 +31,11 @@ class MainActivity : AppCompatActivity(), ApplicationContract.View {
         val spinnerTo: Spinner = findViewById(R.id.spinner_to)
         spinnerFrom.adapter = arrayAdapter
         spinnerTo.adapter = arrayAdapter
+    }
+
+    override fun createAlert(msg: String) {
+        val toast = Toast.makeText(applicationContext, msg, Toast.LENGTH_SHORT)
+        toast.show()
     }
 
     override fun getStationFrom(): Int {

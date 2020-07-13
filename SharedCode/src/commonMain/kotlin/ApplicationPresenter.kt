@@ -20,6 +20,10 @@ class ApplicationPresenter: ApplicationContract.Presenter() {
     override fun onSubmitPressed(view: ApplicationContract.View) {
         val stationFrom = getShortStationName(view.getStationFrom())
         val stationTo = getShortStationName(view.getStationTo())
+        if (stationFrom == stationTo) {
+            view.createAlert("No ticket needed!")
+            return
+        }
         view.openLink(getFullUrl(stationFrom, stationTo))
     }
 }

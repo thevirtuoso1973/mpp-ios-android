@@ -61,6 +61,14 @@ extension ViewController: ApplicationContractView {
         UIApplication.shared.open(url)
     }
     
+    func createAlert(msg: String) {
+        let alert = UIAlertController(title: nil, message: msg, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+            alert.dismiss(animated: true)
+        }))
+        self.present(alert, animated: true)
+    }
+    
     func setStations(stations: KotlinArray) {
         var newStations : Array<String> = []
         for i in 0..<stations.size {
