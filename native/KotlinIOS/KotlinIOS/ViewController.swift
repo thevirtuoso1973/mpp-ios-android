@@ -45,11 +45,19 @@ class ViewController: UIViewController {
     }
     
     @IBAction func submitButtonPressed(_ sender: Any) {
-        presenter.onSubmitButtonPressed(view: self)
+        presenter.onSubmitPressed(view: self)
     }
 }
 
 extension ViewController: ApplicationContractView {
+    func setStations(stations: KotlinArray) {
+        var newStations : Array<String> = []
+        for i in 0..<stations.size {
+            newStations.append(stations.get(index: i) as! String)
+        }
+        stationPickerDelegate.setPickerOptions(newOptions: newStations)
+    }
+    
     func setLabel(text: String) {
         label.text = text
     }
