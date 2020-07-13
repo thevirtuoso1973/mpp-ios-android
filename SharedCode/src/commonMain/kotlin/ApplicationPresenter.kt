@@ -14,6 +14,10 @@ class ApplicationPresenter: ApplicationContract.Presenter() {
 
     override fun onViewTaken(view: ApplicationContract.View) {
         this.view = view
-        view.setLabel(createApplicationScreenMessage())
+        view.setStations(getStations())
+    }
+
+    override fun onSubmitPressed(view: ApplicationContract.View) {
+        TODO("Not yet implemented")
     }
 }
