@@ -14,13 +14,12 @@ class ApplicationPresenter: ApplicationContract.Presenter() {
 
     override fun onViewTaken(view: ApplicationContract.View) {
         this.view = view
-        view.setStations(getStations())
+        view.setStations(getFullStations())
     }
 
     override fun onSubmitPressed(view: ApplicationContract.View) {
-        val stations = getStations()
-        val stationFrom = stations[view.getStationFrom()]
-        val stationTo = stations[view.getStationTo()]
+        val stationFrom = getShortStationName(view.getStationFrom())
+        val stationTo = getShortStationName(view.getStationTo())
         view.openLink(getFullUrl(stationFrom, stationTo))
     }
 }
