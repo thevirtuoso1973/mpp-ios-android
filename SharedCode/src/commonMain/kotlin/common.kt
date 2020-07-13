@@ -1,16 +1,21 @@
 package com.jetbrains.handson.mpp.mobile
 
-val stations = arrayOf("KGX", "EDB", "MAN")
-val stations_full = arrayOf("King's Cross", "Edinburgh", "Manchester")
+data class Station(val fullName: String, val shortName: String)
+
+val stations = arrayOf(
+    Station("King's Cross", "KGX"),
+    Station("Edinburgh", "EDB"),
+    Station("Manchester", "MAN")
+)
 
 expect fun platformName(): String
 
 fun getShortStationName(index: Int): String {
-    return stations[index]
+    return stations[index].shortName
 }
 
 fun getFullStations(): Array<String> {
-    return stations_full
+    return stations.map { it.fullName }.toTypedArray()
 }
 
 fun getFullUrl(station_from: String, station_to: String): String {
