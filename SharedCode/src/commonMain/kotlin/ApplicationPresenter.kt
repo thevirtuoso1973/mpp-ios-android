@@ -34,17 +34,16 @@ class ApplicationPresenter: ApplicationContract.Presenter() {
         val urlString = ApiUrlBuilder(stationFrom, stationTo)
             .withOutboundDate(currentDateTime)
             .build()
-        //view.createAlert("Fetching API from $urlString")
+        println("API URL: $urlString")
         val apiJob = async { getAPIResponseString(urlString) }
         launch {
             val apiResult = deserialiseJson(apiJob.await())
             val journeys = mutableListOf<TrainTimes.Journey>()
-            apiResult.outboundJourneys.forEachIndexed { index, journey ->
+            apiResult.outboundJourneys.forEach { journey ->
                 journeys.plusAssign(TrainTimes.Journey(
-                    // FIXME
-                    1,
-                    1,
-                    1,
+                    getPrice(journey.tickets),
+                    getEpochFromUTC(journey.departureTime),
+                    getEpochFromUTC(journey.arrivalTime),
                     journey.legs.size-1
                 ))
             }

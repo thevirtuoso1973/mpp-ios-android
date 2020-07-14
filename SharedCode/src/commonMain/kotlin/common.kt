@@ -39,3 +39,12 @@ fun deserialiseJson(jsonString: String): ApiResult {
     val json = Json(jsonConfig)
     return json.parse(ApiResult.serializer(), jsonString)
 }
+
+fun getEpochFromUTC(s: String): Long {
+    // FIXME
+    return 0
+}
+fun getPrice(tickets: List<ApiResult.Journey.Ticket>): Int {
+    // FIXME
+    return 0
+}
