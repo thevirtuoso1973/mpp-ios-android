@@ -1,5 +1,6 @@
 package com.jetbrains.handson.mpp.mobile
 
+import kotlinx.serialization.SerialDescriptor
 import kotlinx.serialization.Serializable
 
 //https://mobile-api-dev.lner.co.uk/v1/fares?
@@ -76,8 +77,23 @@ data class ApiResult (
         val arrivalTime: String,
         val status: String,
         val primaryTrainOperator: TrainOperator,
-        val legs: List<Leg>
+        val legs: List<Leg>,
+        val tickets: List<Ticket>
     ) {
+        @Serializable
+        data class Ticket (
+            val fareId: Int,
+            val ftot: String,
+            // val ticketOptionToken: String,
+            val ticketType: String,
+            val ticketClass: String,
+            val ticketCategory: String,
+            val name: String,
+            val description: String,
+            val priceInPennies: Int,
+            // val pricingItem: List<PricingItem>
+            val numberOfTickets: Int
+        )
         @Serializable
         data class Station (
             val displayName: String,
@@ -93,7 +109,7 @@ data class ApiResult (
         @Serializable
         data class Leg(
             val legId: String,
-            val rsid: String,
+            //val rsid: String,
             val origin: Station,
             val destination: Station,
             val type: String,
