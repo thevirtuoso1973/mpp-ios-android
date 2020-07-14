@@ -4,6 +4,8 @@ import io.ktor.client.HttpClient
 import io.ktor.client.features.json.JsonFeature
 import io.ktor.client.features.json.serializer.KotlinxSerializer
 import io.ktor.client.request.get
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonConfiguration
 
 data class Station(val fullName: String, val shortName: String)
 
@@ -28,4 +30,10 @@ suspend fun getAPIResponseString(apiUrl: String): String {
         serializer = KotlinxSerializer()
     }}
     return client.get(apiUrl) as String
+}
+
+fun deserialiseJson(jsonString: String): ApiResult {
+    val jsonConfig = JsonConfiguration(ignoreUnknownKeys = true)
+    val json = Json(jsonConfig)
+    return json.parse(ApiResult.serializer(), jsonString)
 }

@@ -9,6 +9,7 @@ interface ApplicationContract {
         fun getStationTo(): Int
         fun openLink(link: String)
         fun createAlert(msg: String)
+        fun getCurrentUnixTime(): Long
     }
 
     abstract class Presenter: CoroutineScope {

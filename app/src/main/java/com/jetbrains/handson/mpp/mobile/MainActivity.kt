@@ -7,10 +7,12 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import java.util.*
 
 class MainActivity : AppCompatActivity(), ApplicationContract.View {
     private val presenter = ApplicationPresenter()
 
+    @Suppress("UNUSED_PARAMETER")
     fun notifyPresenterSubmit(view: View) {
         presenter.onSubmitPressed(this)
     }
@@ -36,6 +38,10 @@ class MainActivity : AppCompatActivity(), ApplicationContract.View {
     override fun createAlert(msg: String) {
         val toast = Toast.makeText(applicationContext, msg, Toast.LENGTH_SHORT)
         toast.show()
+    }
+
+    override fun getCurrentUnixTime(): Long {
+        return Date().time
     }
 
     override fun getStationFrom(): Int {

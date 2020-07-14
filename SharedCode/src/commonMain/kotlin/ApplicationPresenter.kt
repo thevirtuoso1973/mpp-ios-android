@@ -1,5 +1,8 @@
 package com.jetbrains.handson.mpp.mobile
 
+import com.soywiz.klock.DateTime
+import com.soywiz.klock.TimeSpan
+import com.soywiz.klock.minutes
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.async
@@ -27,10 +30,20 @@ class ApplicationPresenter: ApplicationContract.Presenter() {
             view.createAlert("No ticket needed!")
             return
         }
-        view.openLink(getFullUrl(stationFrom, stationTo))
-        val urlString = ApiUrlBuilder(stationFrom, stationTo).build()
-        view.createAlert("Fetching API from $urlString")
+        //view.openLink(getFullUrl(stationFrom, stationTo))
+        val currentDateTime = DateTime.fromUnix(view.getCurrentUnixTime()).plus(TimeSpan(10 * 60 * 1000.0))
+        val urlString = ApiUrlBuilder(stationFrom, stationTo)
+            .withOutboundDate(currentDateTime)
+            .build()
+        //view.createAlert("Fetching API from $urlString")
         val apiJob = async { getAPIResponseString(urlString) }
-        launch { println(apiJob.await()) }
+        launch {
+            //println(deserialiseJson(apiJob.await()))
+            val apiResult = deserialiseJson(apiJob.await())
+            println("Outbound journey times: ")
+            apiResult.outboundJourneys.forEach {
+                println(it.departureTime)
+            }
+        }
     }
 }

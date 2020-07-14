@@ -1,6 +1,6 @@
 package com.jetbrains.handson.mpp.mobile
 
-import kotlinx.serialization.SerialDescriptor
+import com.soywiz.klock.DateTime
 import kotlinx.serialization.Serializable
 
 //https://mobile-api-dev.lner.co.uk/v1/fares?
@@ -22,7 +22,6 @@ class ApiUrlBuilder(val originStation: String, val destinationStation: String) {
     var journeyType = "single"
     var inboundDateTime = "2020-07-01T12:16:27.371"
     var inboundIsArriveBy = false
-    //var outboundDateTime = "2020-07-01T12:16:27.371"
     var outboundDateTime = "2020-07-20T12:16:27.371"
     var outboundIsArriveBy = false
 
@@ -43,6 +42,10 @@ class ApiUrlBuilder(val originStation: String, val destinationStation: String) {
             "single", "return" -> journeyType = type
             else -> throw RuntimeException("Invalid journey type $type")
         }
+        return this
+    }
+    fun withOutboundDate(date: DateTime): ApiUrlBuilder {
+        outboundDateTime = date.format("yyyy-MM-dd'T'HH:mm:ss.SSS")
         return this
     }
 
