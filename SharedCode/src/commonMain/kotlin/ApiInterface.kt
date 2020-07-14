@@ -127,3 +127,12 @@ data class ApiResult (
         )
     }
 }
+
+data class TrainTimes(val origin: String, val destination: String, val journeys: Array<Journey>) {
+    data class Journey(
+        val price: Int,
+        val departureTime: Long,
+        val arrivalTime: Long,
+        val numberChanges: Int
+    )
+}

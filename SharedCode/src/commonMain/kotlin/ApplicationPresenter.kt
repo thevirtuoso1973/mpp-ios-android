@@ -2,7 +2,6 @@ package com.jetbrains.handson.mpp.mobile
 
 import com.soywiz.klock.DateTime
 import com.soywiz.klock.TimeSpan
-import com.soywiz.klock.minutes
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.async
@@ -38,12 +37,18 @@ class ApplicationPresenter: ApplicationContract.Presenter() {
         //view.createAlert("Fetching API from $urlString")
         val apiJob = async { getAPIResponseString(urlString) }
         launch {
-            //println(deserialiseJson(apiJob.await()))
             val apiResult = deserialiseJson(apiJob.await())
-            println("Outbound journey times: ")
-            apiResult.outboundJourneys.forEach {
-                println(it.departureTime)
+            val journeys = mutableListOf<TrainTimes.Journey>()
+            apiResult.outboundJourneys.forEachIndexed { index, journey ->
+                journeys.plusAssign(TrainTimes.Journey(
+                    // FIXME
+                    1,
+                    1,
+                    1,
+                    journey.legs.size-1
+                ))
             }
+            view.displayTrainTimes(TrainTimes(stationFrom, stationTo, journeys.toTypedArray()))
         }
     }
 }

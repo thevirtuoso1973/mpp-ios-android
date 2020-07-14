@@ -4,6 +4,7 @@ import io.ktor.client.HttpClient
 import io.ktor.client.features.json.JsonFeature
 import io.ktor.client.features.json.serializer.KotlinxSerializer
 import io.ktor.client.request.get
+import kotlinx.serialization.UnstableDefault
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonConfiguration
 
@@ -32,6 +33,7 @@ suspend fun getAPIResponseString(apiUrl: String): String {
     return client.get(apiUrl) as String
 }
 
+@OptIn(UnstableDefault::class)
 fun deserialiseJson(jsonString: String): ApiResult {
     val jsonConfig = JsonConfiguration(ignoreUnknownKeys = true)
     val json = Json(jsonConfig)

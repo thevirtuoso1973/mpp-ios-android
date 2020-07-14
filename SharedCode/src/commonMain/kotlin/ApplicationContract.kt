@@ -7,9 +7,12 @@ interface ApplicationContract {
         fun setStations(stations: Array<Station>)
         fun getStationFrom(): Int
         fun getStationTo(): Int
+
         fun openLink(link: String)
         fun createAlert(msg: String)
         fun getCurrentUnixTime(): Long
+
+        fun displayTrainTimes(trainTimes: TrainTimes)
     }
 
     abstract class Presenter: CoroutineScope {
