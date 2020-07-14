@@ -21,7 +21,8 @@ class ApiUrlBuilder(val originStation: String, val destinationStation: String) {
     var journeyType = "single"
     var inboundDateTime = "2020-07-01T12:16:27.371"
     var inboundIsArriveBy = false
-    var outboundDateTime = "2020-07-01T12:16:27.371"
+    //var outboundDateTime = "2020-07-01T12:16:27.371"
+    var outboundDateTime = "2020-07-20T12:16:27.371"
     var outboundIsArriveBy = false
 
     fun withNoChanges(changesDisallowed: Boolean): ApiUrlBuilder {

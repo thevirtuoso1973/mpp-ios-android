@@ -1,6 +1,9 @@
 package com.jetbrains.handson.mpp.mobile
 
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
 class ApplicationPresenter: ApplicationContract.Presenter() {
@@ -25,7 +28,9 @@ class ApplicationPresenter: ApplicationContract.Presenter() {
             return
         }
         view.openLink(getFullUrl(stationFrom, stationTo))
-        val ApiUrl = ApiUrlBuilder(stationFrom, stationTo).build()
-        view.createAlert("Fetching API from $ApiUrl")
+        val urlString = ApiUrlBuilder(stationFrom, stationTo).build()
+        view.createAlert("Fetching API from $urlString")
+        val apiJob = async { getAPIResponseString(urlString) }
+        launch { println(apiJob.await()) }
     }
 }
