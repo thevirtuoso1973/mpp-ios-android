@@ -41,10 +41,14 @@ fun deserialiseJson(jsonString: String): ApiResult {
 }
 
 fun getEpochFromUTC(s: String): Long {
-    // FIXME
-    return 0
+    // NOTE: Not completely accurate
+    // TODO: make better?
+    val year: Long = s.substring(0,4).toLong()
+    val month: Long = s.substring(5,7).toLong()
+    val day: Long = s.substring(8,10).toLong()
+    val hour: Long = s.substring(11,13).toLong()
+    return 365*24*60*60*(year-1970) + 31*24*60*60*(month-1) + 24*60*60*day + 60*60*hour
 }
 fun getPrice(tickets: List<ApiResult.Journey.Ticket>): Int {
-    // FIXME
-    return 0
+    return tickets.map { it.priceInPennies }.sum()
 }

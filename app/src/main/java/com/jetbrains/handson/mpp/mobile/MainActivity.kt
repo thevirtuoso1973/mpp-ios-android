@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.ArrayAdapter
-import android.widget.LinearLayout
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -19,10 +18,7 @@ class MainActivity : AppCompatActivity(), ApplicationContract.View {
     private lateinit var viewAdapter: RecyclerView.Adapter<*>
     private lateinit var viewManager: RecyclerView.LayoutManager
 
-    private var data = mutableListOf(
-        // Test data
-        TrainTimes.Journey(0,0,0,0)
-    )
+    private var data = mutableListOf<TrainTimes.Journey>()
 
     @Suppress("UNUSED_PARAMETER")
     fun notifyPresenterSubmit(view: View) {
