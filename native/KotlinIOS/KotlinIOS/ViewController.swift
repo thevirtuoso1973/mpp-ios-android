@@ -3,9 +3,7 @@ import SharedCode
 
 class PickerDelegate: NSObject, UIPickerViewDelegate, UIPickerViewDataSource {
     private var pickerOptions: Array<String> = ["a", "b", "c"]
-    
-    func PickerDelegate() {
-    }
+    func PickerDelegate() {}
     
     func pickerView(_: UIPickerView, titleForRow: Int, forComponent: Int) -> String? {
         return pickerOptions[titleForRow]
@@ -29,6 +27,7 @@ class ViewController: UIViewController {
     @IBOutlet private var firstStationPicker: UIPickerView!
     @IBOutlet private var secondStationPicker: UIPickerView!
     @IBOutlet private var submitButton: UIButton!
+    @IBOutlet private var resultTable: UITableView!
     
     private let presenter: ApplicationContractPresenter = ApplicationPresenter()
     private let stationPickerDelegate = PickerDelegate()
@@ -76,4 +75,20 @@ extension ViewController: ApplicationContractView {
         }
         stationPickerDelegate.setPickerOptions(newOptions: newStations)
     }
+    
+    func getCurrentUnixTime() -> Int64 {
+        return Int64(Date().timeIntervalSince1970 * 1000)
+    }
+}
+
+extension ViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return UITableViewCell()
+    }
+    
+    
 }
