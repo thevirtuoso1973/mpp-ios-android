@@ -32,6 +32,9 @@ class ViewController: UIViewController {
     private let presenter: ApplicationContractPresenter = ApplicationPresenter()
     private let stationPickerDelegate = PickerDelegate()
     
+    private var traintimes: TrainTimes? = nil
+    private let customCellIdentifier = "JOURNEY_CELL"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.onViewTaken(view: self)
@@ -39,6 +42,10 @@ class ViewController: UIViewController {
         firstStationPicker.dataSource = stationPickerDelegate
         secondStationPicker.delegate = stationPickerDelegate
         secondStationPicker.dataSource = stationPickerDelegate
+        
+        resultTable.tableFooterView = UIView(frame: .zero)
+        let nib = UINib(nibName: "JourneyCell", bundle: nil)
+        resultTable.register(nib, forCellReuseIdentifier: customCellIdentifier)
     }
     
     @IBAction func submitButtonPressed(_ sender: Any) {
@@ -47,6 +54,11 @@ class ViewController: UIViewController {
 }
 
 extension ViewController: ApplicationContractView {
+    func displayTrainTimes(trainTimes: TrainTimes) {
+        traintimes = trainTimes
+        resultTable.reloadData()
+    }
+    
     func getStationFrom() -> Int32 {
         return Int32(firstStationPicker.selectedRow(inComponent: 0))
     }
@@ -83,12 +95,15 @@ extension ViewController: ApplicationContractView {
 
 extension ViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if let traintimes = traintimes {
+            return Int(traintimes.journeys.size)
+        }
         return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        let cell = tableView.dequeueReusableCell(withIdentifier: customCellIdentifier) as! JourneyCell
+        cell.updateCell(traintimes!.journeys.get(index: Int32(indexPath.row)) as! TrainTimes.Journey)
+        return cell
     }
-    
-    
 }
