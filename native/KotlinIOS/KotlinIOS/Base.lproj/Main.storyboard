@@ -76,7 +76,6 @@
                     </view>
                     <connections>
                         <outlet property="firstStationPicker" destination="Ooy-Gg-0KB" id="EQJ-E7-P6i"/>
-                        <outlet property="loading" destination="3PQ-1U-N4a" id="qhk-TM-UK2"/>
                         <outlet property="loadingView" destination="3PQ-1U-N4a" id="0g6-V9-vka"/>
                         <outlet property="resultTable" destination="mjD-hx-qWW" id="2J1-bj-xKe"/>
                         <outlet property="secondStationPicker" destination="ktU-KD-1Nr" id="nre-dJ-Gj5"/>

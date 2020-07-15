@@ -47,6 +47,7 @@ class ViewController: UIViewController {
         resultTable.tableFooterView = UIView(frame: .zero)
         let nib = UINib(nibName: "JourneyCell", bundle: nil)
         resultTable.register(nib, forCellReuseIdentifier: customCellIdentifier)
+        view.bringSubviewToFront(loadingView)
     }
     
     @IBAction func submitButtonPressed(_ sender: Any) {
