@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity(), ApplicationContract.View {
         presenter.onViewTaken(this)
     }
 
-    override fun setStations(stations: Array<ApiResult.Journey.Station>) {
+    override fun setStations(stations: Array<StationApiResult.Station>) {
         val arrayAdapter = ArrayAdapter<String>(this,
             android.R.layout.simple_spinner_dropdown_item,
             stations.map { it.name }

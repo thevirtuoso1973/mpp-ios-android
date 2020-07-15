@@ -83,9 +83,11 @@ extension ViewController: ApplicationContractView {
     func setStations(stations: KotlinArray) {
         var newStations : Array<String> = []
         for i in 0..<stations.size {
-            newStations.append((stations.get(index: i) as! Station).fullName)
+            newStations.append((stations.get(index: i) as! StationApiResult.Station).name)
         }
         stationPickerDelegate.setPickerOptions(newOptions: newStations)
+        firstStationPicker.reloadAllComponents()
+        secondStationPicker.reloadAllComponents()
     }
     
     func getCurrentUnixTime() -> Int64 {

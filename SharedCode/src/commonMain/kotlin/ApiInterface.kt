@@ -1,6 +1,7 @@
 package com.jetbrains.handson.mpp.mobile
 
 import com.soywiz.klock.DateTime
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 //https://mobile-api-dev.lner.co.uk/v1/fares?
@@ -101,6 +102,7 @@ data class ApiResult (
         )
         @Serializable
         data class Station (
+            @SerialName("displayName")
             val name: String,
             val crs: String?
         )
@@ -130,7 +132,13 @@ data class ApiResult (
 }
 
 @Serializable
-data class StationApiResult(val stations: List<ApiResult.Journey.Station>)
+data class StationApiResult(val stations: List<Station>) {
+    @Serializable
+    data class Station(
+        val name: String,
+        val crs: String?
+    )
+}
 
 data class TrainTimes(val origin: String, val destination: String, val journeys: Array<Journey>) {
     data class Journey(

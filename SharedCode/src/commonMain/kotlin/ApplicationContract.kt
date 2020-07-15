@@ -4,7 +4,7 @@ import kotlinx.coroutines.CoroutineScope
 
 interface ApplicationContract {
     interface View {
-        fun setStations(stations: Array<ApiResult.Journey.Station>)
+        fun setStations(stations: Array<StationApiResult.Station>)
 
         fun openLink(link: String)
         fun createAlert(msg: String)

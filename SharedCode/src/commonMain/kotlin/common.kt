@@ -13,7 +13,7 @@ import kotlinx.serialization.json.JsonConfiguration
 
 data class AppSubmitResult(val stationFromIndex: Int, val stationToIndex: Int)
 
-var stations: Array<ApiResult.Journey.Station> = arrayOf(ApiResult.Journey.Station(
+var stations: Array<StationApiResult.Station> = arrayOf(StationApiResult.Station(
     "King's Cross", "KGX")
 )
 

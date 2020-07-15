@@ -21,7 +21,7 @@ class ApplicationPresenter: ApplicationContract.Presenter() {
         launch {
             val apiResult = getAPIResponse<StationApiResult>(stationsEndpoint)
             if (apiResult != null) {
-                stations = apiResult.stations.filter { it.crs != null }.toTypedArray()
+                stations = apiResult.stations.filter { it.crs != null }.sortedBy {it.name}.toTypedArray()
                 view.setStations(stations)
             } else {
                 view.createAlert("Couldn't retrieve stations.")
