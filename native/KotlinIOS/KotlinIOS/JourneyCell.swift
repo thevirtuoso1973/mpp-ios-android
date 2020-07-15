@@ -17,8 +17,6 @@ class JourneyCell: UITableViewCell {
     @IBOutlet var legsLabel: UILabel!
     
     func updateCell(_ journey: TrainTimes.Journey) {
-        print(journey)
-        //priceLabel.text = "£\(journey.price / 100).\(String(format: "%02i", journey.price % 100))"
         priceLabel.text = String(format: "£%i.%02i", journey.price / 100, journey.price % 100)
         legsLabel.text = "\(journey.numberChanges + 1)"
         
