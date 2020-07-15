@@ -5,8 +5,6 @@ import kotlinx.coroutines.CoroutineScope
 interface ApplicationContract {
     interface View {
         fun setStations(stations: Array<Station>)
-        fun getStationFrom(): Int
-        fun getStationTo(): Int
 
         fun openLink(link: String)
         fun createAlert(msg: String)
@@ -17,6 +15,6 @@ interface ApplicationContract {
 
     abstract class Presenter: CoroutineScope {
         abstract fun onViewTaken(view: View)
-        abstract fun onSubmitPressed()
+        abstract fun onSubmitPressed(result: AppSubmitResult)
     }
 }

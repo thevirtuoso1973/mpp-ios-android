@@ -21,10 +21,10 @@ class ApplicationPresenter: ApplicationContract.Presenter() {
         view.setStations(stations)
     }
 
-    override fun onSubmitPressed() {
+    override fun onSubmitPressed(result: AppSubmitResult) {
         val view = this.viewRef!!
-        val stationFrom = getShortStationName(view.getStationFrom())
-        val stationTo = getShortStationName(view.getStationTo())
+        val stationFrom = getShortStationName(result.stationFromIndex)
+        val stationTo = getShortStationName(result.stationToIndex)
         if (stationFrom == stationTo) {
             view.createAlert("No ticket needed!")
             return

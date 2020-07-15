@@ -12,6 +12,8 @@ import kotlinx.serialization.json.JsonConfiguration
 
 data class Station(val fullName: String, val shortName: String)
 
+data class AppSubmitResult(val stationFromIndex: Int, val stationToIndex: Int)
+
 val stations = arrayOf(
     Station("King's Cross", "KGX"),
     Station("Edinburgh", "EDB"),

@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity(), ApplicationContract.View {
 
     @Suppress("UNUSED_PARAMETER")
     fun notifyPresenterSubmit(view: View) {
-        presenter.onSubmitPressed()
+        presenter.onSubmitPressed(AppSubmitResult(getStationFrom(), getStationTo()))
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,12 +65,12 @@ class MainActivity : AppCompatActivity(), ApplicationContract.View {
         return Date().time
     }
 
-    override fun getStationFrom(): Int {
+    fun getStationFrom(): Int {
         val spinner: Spinner = findViewById(R.id.spinner_from)
         return spinner.selectedItemPosition
     }
 
-    override fun getStationTo(): Int {
+    fun getStationTo(): Int {
         val spinner: Spinner = findViewById(R.id.spinner_to)
         return spinner.selectedItemPosition
     }
