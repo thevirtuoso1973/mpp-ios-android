@@ -17,8 +17,6 @@ interface ApplicationContract {
 
     abstract class Presenter: CoroutineScope {
         abstract fun onViewTaken(view: View)
-        // TODO: redundant view parameter:
-        // TODO: request stationFrom/stationTo from view directly:
-        abstract fun onSubmitPressed(view: View)
+        abstract fun onSubmitPressed()
     }
 }

@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity(), ApplicationContract.View {
 
     @Suppress("UNUSED_PARAMETER")
     fun notifyPresenterSubmit(view: View) {
-        presenter.onSubmitPressed(this)
+        presenter.onSubmitPressed()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
