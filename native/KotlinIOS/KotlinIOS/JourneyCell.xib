@@ -12,7 +12,7 @@
         <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="JOURNEY_CELL" rowHeight="64" id="L0g-Ml-dB5" customClass="JourneyCell" customModule="KotlinIOS" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="556" height="64"/>
             <autoresizingMask key="autoresizingMask"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="L0g-Ml-dB5" id="HEX-oc-CVn" customClass="JourneyCell" customModule="KotlinIOS" customModuleProvider="target">
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="L0g-Ml-dB5" id="HEX-oc-CVn">
                 <rect key="frame" x="0.0" y="0.0" width="556" height="64"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
@@ -41,16 +41,15 @@
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
-                <color key="backgroundColor" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 <constraints>
                     <constraint firstItem="vqZ-Vk-jND" firstAttribute="centerX" secondItem="HEX-oc-CVn" secondAttribute="centerX" id="0im-ov-Wde"/>
                     <constraint firstItem="vqZ-Vk-jND" firstAttribute="top" secondItem="HEX-oc-CVn" secondAttribute="top" constant="8" id="FEK-6z-aSZ"/>
-                    <constraint firstItem="vqZ-Vk-jND" firstAttribute="leading" secondItem="77r-g7-Rfx" secondAttribute="trailing" constant="162" id="FPd-LO-JGc"/>
+                    <constraint firstItem="vqZ-Vk-jND" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="77r-g7-Rfx" secondAttribute="trailing" id="FPd-LO-JGc"/>
                     <constraint firstAttribute="trailing" secondItem="VdZ-LV-5Dk" secondAttribute="trailing" constant="20" id="P8i-Wz-a94"/>
                     <constraint firstItem="sk4-29-CQF" firstAttribute="centerX" secondItem="HEX-oc-CVn" secondAttribute="centerX" id="Pvl-0b-Fmr"/>
                     <constraint firstItem="77r-g7-Rfx" firstAttribute="leading" secondItem="HEX-oc-CVn" secondAttribute="leading" constant="20" id="QIp-sW-wCG"/>
                     <constraint firstItem="sk4-29-CQF" firstAttribute="top" secondItem="vqZ-Vk-jND" secondAttribute="bottom" constant="8" id="VaO-8e-MsW"/>
-                    <constraint firstItem="VdZ-LV-5Dk" firstAttribute="leading" secondItem="vqZ-Vk-jND" secondAttribute="trailing" constant="128" id="Vh1-hL-tXP"/>
+                    <constraint firstItem="VdZ-LV-5Dk" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="vqZ-Vk-jND" secondAttribute="trailing" id="Vh1-hL-tXP"/>
                     <constraint firstAttribute="bottom" secondItem="sk4-29-CQF" secondAttribute="bottom" constant="8" id="cWT-vZ-Jfi"/>
                     <constraint firstItem="VdZ-LV-5Dk" firstAttribute="centerY" secondItem="HEX-oc-CVn" secondAttribute="centerY" id="fNa-gx-nTC"/>
                     <constraint firstItem="77r-g7-Rfx" firstAttribute="centerY" secondItem="HEX-oc-CVn" secondAttribute="centerY" id="w5q-KH-prz"/>
