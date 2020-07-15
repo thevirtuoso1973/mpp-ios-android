@@ -16,10 +16,10 @@ class TrainDataAdapter(private val dataSet: List<TrainTimes.Journey>) :
     class MyViewHolder(private var view: View) : RecyclerView.ViewHolder(view) {
         @SuppressLint("SetTextI18n")
         fun addJourney(j: TrainTimes.Journey) {
-            view.numberChanges.text = j.numberChanges.toString()
+            view.numberChanges.text = j.numberChanges.toString() // TODO: determine why interfaces disagree
             view.price.text = "£${j.price/100}.${j.price % 100}"
-            val depart = Date(j.departureTime*1000)
-            val arrive = Date(j.arrivalTime*1000)
+            val depart = Date(j.departureTime)
+            val arrive = Date(j.arrivalTime)
             val format = SimpleDateFormat.getDateTimeInstance()
             view.departureTime.text = format.format(depart)
             view.arrivalTime.text = format.format(arrive)
