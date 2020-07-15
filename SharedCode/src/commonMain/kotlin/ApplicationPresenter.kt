@@ -37,7 +37,11 @@ class ApplicationPresenter: ApplicationContract.Presenter() {
         println("API URL: $urlString")
         launch {
             val apiResult = getAPIResponse(urlString)
-            view.displayTrainTimes(apiResult.toTrainTimes())
+            if (apiResult != null) {
+                view.displayTrainTimes(apiResult.toTrainTimes())
+            } else {
+                view.createAlert("Request failed, please try again later or with different stations.")
+            }
         }
     }
 }
