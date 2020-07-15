@@ -1,5 +1,7 @@
 package com.jetbrains.handson.mpp.mobile
 
+import com.soywiz.klock.DateFormat
+import com.soywiz.klock.parse
 import io.ktor.client.HttpClient
 import io.ktor.client.features.json.JsonFeature
 import io.ktor.client.features.json.serializer.KotlinxSerializer
@@ -34,20 +36,25 @@ suspend fun getAPIResponseString(apiUrl: String): String {
 }
 
 @OptIn(UnstableDefault::class)
+suspend fun getAPIResponse(apiUrl: String): ApiResult {
+    val client = HttpClient { install(JsonFeature) {
+        val jsonConfig = JsonConfiguration(ignoreUnknownKeys = true)
+        serializer = KotlinxSerializer(Json(jsonConfig))
+    }}
+    return client.get(apiUrl)
+}
+
+@OptIn(UnstableDefault::class)
 fun deserialiseJson(jsonString: String): ApiResult {
     val jsonConfig = JsonConfiguration(ignoreUnknownKeys = true)
     val json = Json(jsonConfig)
     return json.parse(ApiResult.serializer(), jsonString)
 }
 
-fun getEpochFromUTC(s: String): Long {
-    // NOTE: Not completely accurate
-    // TODO: make better?
-    val year: Long = s.substring(0,4).toLong()
-    val month: Long = s.substring(5,7).toLong()
-    val day: Long = s.substring(8,10).toLong()
-    val hour: Long = s.substring(11,13).toLong()
-    return 365*24*60*60*(year-1970) + 31*24*60*60*(month-1) + 24*60*60*day + 60*60*hour
+fun getEpochMillisFromUTC(s: String): Long {
+    val formatter = DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSz")
+    val date = formatter.parse(s)
+    return date.utc.unixMillisLong
 }
 fun getPrice(tickets: List<ApiResult.Journey.Ticket>): Int {
     return tickets.map { it.priceInPennies }.sum()

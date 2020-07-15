@@ -7,3 +7,6 @@ local.properties
 
 *xcuserdata
 *xcworkspacedata
+
+native/KotlinIOS/KotlinIOS/.DS_Store
+native/KotlinIOS/KotlinIOS/Base.lproj/.DS_Store
