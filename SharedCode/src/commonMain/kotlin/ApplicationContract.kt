@@ -9,6 +9,7 @@ interface ApplicationContract {
         fun openLink(link: String)
         fun createAlert(msg: String)
         fun getCurrentUnixTime(): Long
+        fun setLoading(loading: Boolean)
 
         fun displayTrainTimes(trainTimes: TrainTimes)
     }

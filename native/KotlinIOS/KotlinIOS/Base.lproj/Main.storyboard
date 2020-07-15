@@ -34,6 +34,10 @@
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ooy-Gg-0KB">
                                 <rect key="frame" x="0.0" y="99" width="207" height="216"/>
                             </pickerView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" id="3PQ-1U-N4a">
+                                <rect key="frame" x="20" y="426" width="374" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mjD-hx-qWW">
                                 <rect key="frame" x="20" y="373" width="374" height="469"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -72,6 +76,7 @@
                     </view>
                     <connections>
                         <outlet property="firstStationPicker" destination="Ooy-Gg-0KB" id="EQJ-E7-P6i"/>
+                        <outlet property="loadingView" destination="3PQ-1U-N4a" id="0g6-V9-vka"/>
                         <outlet property="resultTable" destination="mjD-hx-qWW" id="2J1-bj-xKe"/>
                         <outlet property="secondStationPicker" destination="ktU-KD-1Nr" id="nre-dJ-Gj5"/>
                         <outlet property="submitButton" destination="gIg-JY-WSI" id="Kzw-Au-w2M"/>

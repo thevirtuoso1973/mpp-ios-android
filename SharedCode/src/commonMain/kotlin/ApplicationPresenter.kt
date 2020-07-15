@@ -44,8 +44,10 @@ class ApplicationPresenter: ApplicationContract.Presenter() {
             .withOutboundDate(currentDateTime)
             .build()
         println("API URL: $urlString")
+        view.setLoading(true)
         launch {
             val apiResult = getAPIResponse<ApiResult>(urlString)
+            view.setLoading(false)
             if (apiResult != null) {
                 view.displayTrainTimes(apiResult.toTrainTimes())
             } else {
