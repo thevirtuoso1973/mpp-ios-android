@@ -28,6 +28,7 @@ class ViewController: UIViewController {
     @IBOutlet private var secondStationPicker: UIPickerView!
     @IBOutlet private var submitButton: UIButton!
     @IBOutlet private var resultTable: UITableView!
+    @IBOutlet private var loadingView: UIActivityIndicatorView!
     
     private let presenter: ApplicationContractPresenter = ApplicationPresenter()
     private let stationPickerDelegate = PickerDelegate()
@@ -90,6 +91,14 @@ extension ViewController: ApplicationContractView {
     
     func getCurrentUnixTime() -> Int64 {
         return Int64(Date().timeIntervalSince1970 * 1000)
+    }
+    
+    func setLoading(loading: Bool) {
+        if loading {
+            loadingView.startAnimating()
+        } else {
+            loadingView.stopAnimating()
+        }
     }
 }
 
