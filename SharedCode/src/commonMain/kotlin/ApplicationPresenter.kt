@@ -4,7 +4,6 @@ import com.soywiz.klock.DateTime
 import com.soywiz.klock.TimeSpan
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
@@ -35,9 +34,8 @@ class ApplicationPresenter: ApplicationContract.Presenter() {
             .withOutboundDate(currentDateTime)
             .build()
         println("API URL: $urlString")
-        val apiJob = async { getAPIResponseString(urlString) }
         launch {
-            val apiResult = deserialiseJson(apiJob.await())
+            val apiResult = getAPIResponse(urlString) // TODO: Fix bug with JSON field missing causing an exception
             val journeys = mutableListOf<TrainTimes.Journey>()
             apiResult.outboundJourneys.forEach { journey ->
                 journeys.plusAssign(TrainTimes.Journey(

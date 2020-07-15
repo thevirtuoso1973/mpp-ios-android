@@ -34,6 +34,15 @@ suspend fun getAPIResponseString(apiUrl: String): String {
 }
 
 @OptIn(UnstableDefault::class)
+suspend fun getAPIResponse(apiUrl: String): ApiResult {
+    val client = HttpClient { install(JsonFeature) {
+        val jsonConfig = JsonConfiguration(ignoreUnknownKeys = true)
+        serializer = KotlinxSerializer(Json(jsonConfig))
+    }}
+    return client.get(apiUrl)
+}
+
+@OptIn(UnstableDefault::class)
 fun deserialiseJson(jsonString: String): ApiResult {
     val jsonConfig = JsonConfiguration(ignoreUnknownKeys = true)
     val json = Json(jsonConfig)
