@@ -35,7 +35,7 @@ class ApplicationPresenter: ApplicationContract.Presenter() {
             .build()
         println("API URL: $urlString")
         launch {
-            val apiResult = deserialiseJson(apiJob.await())
+            val apiResult = getAPIResponse(urlString)
             view.displayTrainTimes(apiResult.toTrainTimes())
         }
     }

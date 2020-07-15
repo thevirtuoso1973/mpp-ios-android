@@ -65,8 +65,8 @@ fun ApiResult.toTrainTimes(): TrainTimes{
     this.outboundJourneys.forEach { journey ->
         journeys.plusAssign(TrainTimes.Journey(
             getPrice(journey.tickets),
-            getEpochFromUTC(journey.departureTime),
-            getEpochFromUTC(journey.arrivalTime),
+            getEpochMillisFromUTC(journey.departureTime),
+            getEpochMillisFromUTC(journey.arrivalTime),
             journey.legs.size-1
         ))
     }
