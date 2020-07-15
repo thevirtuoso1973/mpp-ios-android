@@ -11,24 +11,20 @@ import kotlinx.serialization.UnstableDefault
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonConfiguration
 
-data class Station(val fullName: String, val shortName: String)
-
 data class AppSubmitResult(val stationFromIndex: Int, val stationToIndex: Int)
 
-val stations = arrayOf(
-    Station("King's Cross", "KGX"),
-    Station("Edinburgh", "EDB"),
-    Station("Manchester", "MAN")
+var stations: Array<ApiResult.Journey.Station> = arrayOf(ApiResult.Journey.Station(
+    "King's Cross", "KGX")
 )
 
 expect fun platformName(): String
 
 fun getShortStationName(index: Int): String {
-    return stations[index].shortName
+    return stations[index].crs!!
 }
 
 @OptIn(UnstableDefault::class)
-suspend fun getAPIResponse(apiUrl: String): ApiResult? {
+suspend inline fun <reified T> getAPIResponse(apiUrl: String): T? {
     val client = HttpClient {
         install(JsonFeature) {
             val jsonConfig = JsonConfiguration(ignoreUnknownKeys = true)
@@ -36,7 +32,7 @@ suspend fun getAPIResponse(apiUrl: String): ApiResult? {
         }
     }
     return try {
-        client.get(apiUrl)
+        client.get<T>(apiUrl)
     } catch (ex: MissingFieldException) {
         println("Failed to serialise!")
         println("Msg: ${ex.message}, cause: ${ex.cause}")
@@ -65,7 +61,7 @@ fun ApiResult.toTrainTimes(): TrainTimes{
         ))
     }
     return TrainTimes(
-        this.outboundJourneys.firstOrNull()?.originStation?.displayName ?: "NONE",
-        this.outboundJourneys.lastOrNull()?.originStation?.displayName ?: "NONE",
+        this.outboundJourneys.firstOrNull()?.originStation?.name ?: "NONE",
+        this.outboundJourneys.lastOrNull()?.originStation?.name ?: "NONE",
         journeys.toTypedArray())
 }

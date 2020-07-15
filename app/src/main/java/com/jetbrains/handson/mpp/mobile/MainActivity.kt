@@ -39,10 +39,10 @@ class MainActivity : AppCompatActivity(), ApplicationContract.View {
         presenter.onViewTaken(this)
     }
 
-    override fun setStations(stations: Array<Station>) {
+    override fun setStations(stations: Array<ApiResult.Journey.Station>) {
         val arrayAdapter = ArrayAdapter<String>(this,
             android.R.layout.simple_spinner_dropdown_item,
-            stations.map { it.fullName }
+            stations.map { it.name }
         )
         val spinnerFrom: Spinner = findViewById(R.id.spinner_from)
         val spinnerTo: Spinner = findViewById(R.id.spinner_to)

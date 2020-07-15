@@ -18,6 +18,15 @@ class ApplicationPresenter: ApplicationContract.Presenter() {
 
     override fun onViewTaken(view: ApplicationContract.View) {
         this.viewRef = view
+        launch {
+            val apiResult = getAPIResponse<StationApiResult>(stationsEndpoint)
+            if (apiResult != null) {
+                stations = apiResult.stations.filter { it.crs != null }.toTypedArray()
+                view.setStations(stations)
+            } else {
+                view.createAlert("Couldn't retrieve stations.")
+            }
+        }
         view.setStations(stations)
     }
 
@@ -36,7 +45,7 @@ class ApplicationPresenter: ApplicationContract.Presenter() {
             .build()
         println("API URL: $urlString")
         launch {
-            val apiResult = getAPIResponse(urlString)
+            val apiResult = getAPIResponse<ApiResult>(urlString)
             if (apiResult != null) {
                 view.displayTrainTimes(apiResult.toTrainTimes())
             } else {

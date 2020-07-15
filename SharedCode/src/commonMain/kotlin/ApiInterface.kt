@@ -15,6 +15,8 @@ import kotlinx.serialization.Serializable
 //      outboundDateTime=2020-07-14T19%3A30%3A00.000%2B01%3A00&
 //      outboundIsArriveBy=false
 
+const val stationsEndpoint = "https://mobile-api-dev.lner.co.uk/v1/stations"
+
 class ApiUrlBuilder(val originStation: String, val destinationStation: String) {
     var noChanges = false
     var numberOfAdults = 1
@@ -99,9 +101,8 @@ data class ApiResult (
         )
         @Serializable
         data class Station (
-            val displayName: String,
-            val nlc: String,
-            val crs: String
+            val name: String,
+            val crs: String?
         )
         @Serializable
         data class TrainOperator (
@@ -128,6 +129,9 @@ data class ApiResult (
     }
 }
 
+@Serializable
+data class StationApiResult(val stations: List<ApiResult.Journey.Station>)
+
 data class TrainTimes(val origin: String, val destination: String, val journeys: Array<Journey>) {
     data class Journey(
         val price: Int,
@@ -135,4 +139,24 @@ data class TrainTimes(val origin: String, val destination: String, val journeys:
         val arrivalTime: Long,
         val numberChanges: Int
     )
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other == null || this::class != other::class) return false
+
+        other as TrainTimes
+
+        if (origin != other.origin) return false
+        if (destination != other.destination) return false
+        if (!journeys.contentEquals(other.journeys)) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = origin.hashCode()
+        result = 31 * result + destination.hashCode()
+        result = 31 * result + journeys.contentHashCode()
+        return result
+    }
 }
