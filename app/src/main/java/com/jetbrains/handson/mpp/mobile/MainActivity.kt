@@ -1,12 +1,14 @@
 package com.jetbrains.handson.mpp.mobile
 
 import android.content.Intent
+import android.icu.lang.UCharacter
 import android.os.Bundle
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_main.*
@@ -36,6 +38,8 @@ class MainActivity : AppCompatActivity(), ApplicationContract.View {
             layoutManager = viewManager
             adapter = viewAdapter
         }
+        val divider = DividerItemDecoration(recyclerView.context, DividerItemDecoration.VERTICAL)
+        recyclerView.addItemDecoration(divider)
 
         presenter.onViewTaken(this)
     }
