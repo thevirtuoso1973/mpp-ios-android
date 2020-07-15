@@ -35,17 +35,8 @@ class ApplicationPresenter: ApplicationContract.Presenter() {
             .build()
         println("API URL: $urlString")
         launch {
-            val apiResult = getAPIResponse(urlString) // TODO: Fix bug with JSON field missing causing an exception
-            val journeys = mutableListOf<TrainTimes.Journey>()
-            apiResult.outboundJourneys.forEach { journey ->
-                journeys.plusAssign(TrainTimes.Journey(
-                    getPrice(journey.tickets),
-                    getEpochMillisFromUTC(journey.departureTime),
-                    getEpochMillisFromUTC(journey.arrivalTime),
-                    journey.legs.size-1
-                ))
-            }
-            view.displayTrainTimes(TrainTimes(stationFrom, stationTo, journeys.toTypedArray()))
+            val apiResult = deserialiseJson(apiJob.await())
+            view.displayTrainTimes(apiResult.toTrainTimes())
         }
     }
 }

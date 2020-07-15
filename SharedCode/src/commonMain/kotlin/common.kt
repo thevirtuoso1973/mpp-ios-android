@@ -59,3 +59,19 @@ fun getEpochMillisFromUTC(s: String): Long {
 fun getPrice(tickets: List<ApiResult.Journey.Ticket>): Int {
     return tickets.map { it.priceInPennies }.sum()
 }
+
+fun ApiResult.toTrainTimes(): TrainTimes{
+    val journeys = mutableListOf<TrainTimes.Journey>()
+    this.outboundJourneys.forEach { journey ->
+        journeys.plusAssign(TrainTimes.Journey(
+            getPrice(journey.tickets),
+            getEpochFromUTC(journey.departureTime),
+            getEpochFromUTC(journey.arrivalTime),
+            journey.legs.size-1
+        ))
+    }
+    return TrainTimes(
+        this.outboundJourneys.firstOrNull()?.originStation?.displayName ?: "NONE",
+        this.outboundJourneys.lastOrNull()?.originStation?.displayName ?: "NONE",
+        journeys.toTypedArray())
+}
