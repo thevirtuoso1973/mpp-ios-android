@@ -7,6 +7,7 @@ import io.ktor.client.features.json.JsonFeature
 import io.ktor.client.features.json.serializer.KotlinxSerializer
 import io.ktor.client.request.get
 import kotlinx.serialization.MissingFieldException
+import kotlinx.serialization.Serializable
 import kotlinx.serialization.UnstableDefault
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonConfiguration
@@ -37,6 +38,12 @@ suspend inline fun <reified T> getAPIResponse(apiUrl: String): T? {
         println("Failed to serialise!")
         println("Msg: ${ex.message}, cause: ${ex.cause}")
         println(client.get<String>(apiUrl))
+        null
+    } catch (ex: Throwable) {
+        println("Other error")
+        println("Msg: ${ex.message}, cause: ${ex.cause}")
+        // Can't rerun get() because it might have been the cause of the throw
+        //println(client.get<String>(apiUrl))
         null
     }
 }
