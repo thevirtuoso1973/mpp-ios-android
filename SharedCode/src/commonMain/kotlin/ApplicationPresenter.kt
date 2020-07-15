@@ -38,16 +38,7 @@ class ApplicationPresenter: ApplicationContract.Presenter() {
         val apiJob = async { getAPIResponseString(urlString) }
         launch {
             val apiResult = deserialiseJson(apiJob.await())
-            val journeys = mutableListOf<TrainTimes.Journey>()
-            apiResult.outboundJourneys.forEach { journey ->
-                journeys.plusAssign(TrainTimes.Journey(
-                    getPrice(journey.tickets),
-                    getEpochFromUTC(journey.departureTime),
-                    getEpochFromUTC(journey.arrivalTime),
-                    journey.legs.size-1
-                ))
-            }
-            view.displayTrainTimes(TrainTimes(stationFrom, stationTo, journeys.toTypedArray()))
+            view.displayTrainTimes(apiResult.toTrainTimes())
         }
     }
 }
