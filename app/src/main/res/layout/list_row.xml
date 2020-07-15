@@ -45,7 +45,7 @@
             android:layout_gravity="center"
             android:textSize="12sp"
             android:layout_weight=".25"
-            android:id="@+id/numberChanges"
+            android:id="@+id/legs"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp" />

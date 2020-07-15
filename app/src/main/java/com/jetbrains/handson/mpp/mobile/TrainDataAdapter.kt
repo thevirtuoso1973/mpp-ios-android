@@ -16,7 +16,7 @@ class TrainDataAdapter(private val dataSet: List<TrainTimes.Journey>) :
     class MyViewHolder(private var view: View) : RecyclerView.ViewHolder(view) {
         @SuppressLint("SetTextI18n")
         fun addJourney(j: TrainTimes.Journey) {
-            view.numberChanges.text = j.numberChanges.toString() // TODO: determine why interfaces disagree
+            view.legs.text = (j.numberChanges+1).toString()
             view.price.text = "£${j.price/100}.${j.price % 100}"
             val depart = Date(j.departureTime)
             val arrive = Date(j.arrivalTime)
@@ -26,7 +26,7 @@ class TrainDataAdapter(private val dataSet: List<TrainTimes.Journey>) :
         }
         @SuppressLint("SetTextI18n")
         fun addTitle() {
-            view.numberChanges.text = "Changes"
+            view.legs.text = "Legs"
             view.price.text = "Price"
             view.departureTime.text = "Departure Time"
             view.arrivalTime.text = "Arrival Time"
