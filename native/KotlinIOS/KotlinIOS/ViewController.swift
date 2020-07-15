@@ -49,7 +49,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func submitButtonPressed(_ sender: Any) {
-        presenter.onSubmitPressed(view: self)
+        presenter.onSubmitPressed(result: AppSubmitResult(stationFromIndex: getStationFrom(), stationToIndex: getStationTo()))
     }
 }
 

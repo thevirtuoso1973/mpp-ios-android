@@ -10,20 +10,21 @@ import kotlin.coroutines.CoroutineContext
 class ApplicationPresenter: ApplicationContract.Presenter() {
 
     private val dispatchers = AppDispatchersImpl()
-    private var view: ApplicationContract.View? = null
+    private var viewRef: ApplicationContract.View? = null
     private val job: Job = SupervisorJob()
 
     override val coroutineContext: CoroutineContext
         get() = dispatchers.main + job
 
     override fun onViewTaken(view: ApplicationContract.View) {
-        this.view = view
+        this.viewRef = view
         view.setStations(stations)
     }
 
-    override fun onSubmitPressed(view: ApplicationContract.View) {
-        val stationFrom = getShortStationName(view.getStationFrom())
-        val stationTo = getShortStationName(view.getStationTo())
+    override fun onSubmitPressed(result: AppSubmitResult) {
+        val view = this.viewRef!!
+        val stationFrom = getShortStationName(result.stationFromIndex)
+        val stationTo = getShortStationName(result.stationToIndex)
         if (stationFrom == stationTo) {
             view.createAlert("No ticket needed!")
             return
@@ -36,7 +37,11 @@ class ApplicationPresenter: ApplicationContract.Presenter() {
         println("API URL: $urlString")
         launch {
             val apiResult = getAPIResponse(urlString)
-            view.displayTrainTimes(apiResult.toTrainTimes())
+            if (apiResult != null) {
+                view.displayTrainTimes(apiResult.toTrainTimes())
+            } else {
+                view.createAlert("Request failed, please try again later or with different stations.")
+            }
         }
     }
 }
