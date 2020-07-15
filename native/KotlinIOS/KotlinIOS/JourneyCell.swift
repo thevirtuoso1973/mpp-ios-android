@@ -25,7 +25,6 @@ class JourneyCell: UITableViewCell {
         
         let departDate: Date = Date.init(timeIntervalSince1970: TimeInterval(journey.departureTime / 1000))
         let arrivalDate = Date.init(timeIntervalSince1970: TimeInterval(journey.arrivalTime / 1000))
-        print(departDate)
         departureLabel.text = dateFormatter.string(from: departDate)
         arrivalLabel.text = dateFormatter.string(from: arrivalDate)
     }
