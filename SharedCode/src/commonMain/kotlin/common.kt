@@ -42,7 +42,7 @@ fun deserialiseJson(jsonString: String): ApiResult {
     return json.parse(ApiResult.serializer(), jsonString)
 }
 
-fun getEpochFromUTC(s: String): Long {
+fun getEpochMillisFromUTC(s: String): Long {
     val formatter = DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSz")
     val date = formatter.parse(s)
     return date.utc.unixMillisLong
