@@ -49,7 +49,11 @@ class ApplicationPresenter: ApplicationContract.Presenter() {
             val apiResult = getAPIResponse<ApiResult>(urlString)
             view.setLoading(false)
             if (apiResult != null) {
-                view.displayTrainTimes(apiResult.toTrainTimes())
+                val trainTimes = apiResult.toTrainTimes()
+                view.displayTrainTimes(trainTimes)
+                if (trainTimes.journeys.isEmpty()) {
+                    view.createAlert("No routes found")
+                }
             } else {
                 view.createAlert("Request failed, please try again later or with different stations.")
             }
