@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
 class MainActivity : AppCompatActivity(), ApplicationContract.View {
@@ -77,5 +78,9 @@ class MainActivity : AppCompatActivity(), ApplicationContract.View {
 
     override fun openLink(link: String) {
         startActivity(Intent.parseUri(link, 0))
+    }
+
+    override fun setLoading(loading: Boolean) {
+        progressBar.visibility = if (loading) View.VISIBLE else View.GONE
     }
 }
