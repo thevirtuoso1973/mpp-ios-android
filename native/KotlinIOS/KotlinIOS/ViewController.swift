@@ -106,9 +106,14 @@ extension ViewController: ApplicationContractView {
 }
 
 extension ViewController: UITableViewDataSource, UITableViewDelegate {
+    func getJourney(_ n: Int) -> TrainTimes.Journey {
+        return traintimes!.journeys.get(index: Int32(n - 1)) as! TrainTimes.Journey
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let journey = traintimes?.journeys.get(index: Int32(indexPath.row)) as! TrainTimes.Journey
+        let journey = getJourney(indexPath.row)
         print(journey.trainOperator)
+        JourneyView.showPopup(parent: self)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -121,7 +126,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: customCellIdentifier) as! JourneyCell
         if indexPath.row > 0 {
-            cell.updateCell(traintimes!.journeys.get(index: Int32(indexPath.row - 1)) as! TrainTimes.Journey)
+            cell.updateCell(getJourney(indexPath.row))
         }
         return cell
     }
