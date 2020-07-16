@@ -33,7 +33,7 @@ class JourneyCell: UITableViewCell {
         let hourFormatter = DateFormatter()
         hourFormatter.dateFormat = "HH:mm"
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "HH:mm:ss dd/MM/yy"
+        dateFormatter.dateFormat = "HH:mm dd/MM/yy"
         
         let now = Date()
         if (Calendar.current.isDate(date, inSameDayAs: now)) {
