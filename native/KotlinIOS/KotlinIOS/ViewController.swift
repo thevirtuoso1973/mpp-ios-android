@@ -113,14 +113,16 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let traintimes = traintimes {
-            return Int(traintimes.journeys.size)
+            return Int(traintimes.journeys.size + 1)
         }
-        return 0
+        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: customCellIdentifier) as! JourneyCell
-        cell.updateCell(traintimes!.journeys.get(index: Int32(indexPath.row)) as! TrainTimes.Journey)
+        if indexPath.row > 0 {
+            cell.updateCell(traintimes!.journeys.get(index: Int32(indexPath.row - 1)) as! TrainTimes.Journey)
+        }
         return cell
     }
 }
