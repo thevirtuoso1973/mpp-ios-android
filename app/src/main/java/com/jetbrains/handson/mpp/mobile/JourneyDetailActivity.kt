@@ -14,6 +14,8 @@ class JourneyDetailActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.popup)
 
+        val duration = findViewById<TextView>(R.id.duration)
+        duration.text = "Duration: ${intent.getStringExtra("duration")}"
         val statusText = findViewById<TextView>(R.id.status)
         statusText.text = "Status: ${intent.getStringExtra("status")}"
         val operator = findViewById<TextView>(R.id.primaryOperator)

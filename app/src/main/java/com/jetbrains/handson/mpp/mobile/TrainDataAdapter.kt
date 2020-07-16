@@ -9,6 +9,7 @@ import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.list_row.view.*
 import java.util.*
+import java.util.concurrent.TimeUnit
 
 class TrainDataAdapter(private val dataSet: List<TrainTimes.Journey>) :
     RecyclerView.Adapter<TrainDataAdapter.MyViewHolder>() {
@@ -88,6 +89,13 @@ class TrainDataAdapter(private val dataSet: List<TrainTimes.Journey>) :
                 intent.putExtra("stationChangeNames", holder.journey?.changes?.map {
                     it.name
                 }?.toTypedArray())
+                val diff = holder.journey?.arrivalTime!! - holder.journey?.departureTime!!
+                val hours = TimeUnit.MILLISECONDS.toHours(diff)
+                val min = TimeUnit.MILLISECONDS.toMinutes(diff) - hours*60
+                intent.putExtra("duration", if (hours == 0L)
+                    "$min minutes"
+                else
+                    "$hours hours, $min minutes")
                 startActivity(view.context, intent, null)
             }
         }
