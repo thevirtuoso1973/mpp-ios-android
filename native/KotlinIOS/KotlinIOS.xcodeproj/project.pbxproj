@@ -17,6 +17,8 @@
 		47729E6F22F4806C00B9B36B /* SharedCode.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 47729E6D22F4806B00B9B36B /* SharedCode.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		593163D224BDEA2700048A55 /* JourneyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 593163D124BDEA2700048A55 /* JourneyCell.xib */; };
 		593163D424BDEA6100048A55 /* JourneyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 593163D324BDEA6100048A55 /* JourneyCell.swift */; };
+		595C92F924C071760090F3F0 /* JourneyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595C92F824C071760090F3F0 /* JourneyView.swift */; };
+		595C92FB24C0787E0090F3F0 /* JourneyView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 595C92FA24C0787E0090F3F0 /* JourneyView.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +68,8 @@
 		47729E6D22F4806B00B9B36B /* SharedCode.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SharedCode.framework; path = "../../SharedCode/build/xcode-frameworks/SharedCode.framework"; sourceTree = "<group>"; };
 		593163D124BDEA2700048A55 /* JourneyCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JourneyCell.xib; sourceTree = "<group>"; };
 		593163D324BDEA6100048A55 /* JourneyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyCell.swift; sourceTree = "<group>"; };
+		595C92F824C071760090F3F0 /* JourneyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyView.swift; sourceTree = "<group>"; };
+		595C92FA24C0787E0090F3F0 /* JourneyView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = JourneyView.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +129,8 @@
 				47729E1122F447CA00B9B36B /* Info.plist */,
 				593163D124BDEA2700048A55 /* JourneyCell.xib */,
 				593163D324BDEA6100048A55 /* JourneyCell.swift */,
+				595C92F824C071760090F3F0 /* JourneyView.swift */,
+				595C92FA24C0787E0090F3F0 /* JourneyView.storyboard */,
 			);
 			path = KotlinIOS;
 			sourceTree = "<group>";
@@ -255,6 +261,7 @@
 			files = (
 				47729E0D22F447CA00B9B36B /* Assets.xcassets in Resources */,
 				593163D224BDEA2700048A55 /* JourneyCell.xib in Resources */,
+				595C92FB24C0787E0090F3F0 /* JourneyView.storyboard in Resources */,
 				47729E0B22F447C800B9B36B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -303,6 +310,7 @@
 				47729E0822F447C800B9B36B /* ViewController.swift in Sources */,
 				593163D424BDEA6100048A55 /* JourneyCell.swift in Sources */,
 				47729E0622F447C800B9B36B /* AppDelegate.swift in Sources */,
+				595C92F924C071760090F3F0 /* JourneyView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

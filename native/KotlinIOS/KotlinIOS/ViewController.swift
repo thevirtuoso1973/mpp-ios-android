@@ -21,6 +21,10 @@ class PickerDelegate: NSObject, UIPickerViewDelegate, UIPickerViewDataSource {
         pickerOptions = newOptions
     }
     
+    func getPickerOption(at: Int) -> String {
+        return pickerOptions[at]
+    }
+    
 }
 
 class ViewController: UIViewController {
@@ -105,7 +109,22 @@ extension ViewController: ApplicationContractView {
     }
 }
 
-extension ViewController: UITableViewDataSource {
+extension ViewController: UITableViewDataSource, UITableViewDelegate {
+    func getJourney(_ n: Int) -> TrainTimes.Journey {
+        return traintimes!.journeys.get(index: Int32(n - 1)) as! TrainTimes.Journey
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
+        if (indexPath.row > 0) {
+            let journey = getJourney(indexPath.row)
+            let stationFrom = traintimes!.origin
+            let stationTo = traintimes!.destination
+            JourneyView.showPopup(parent: self,
+                                  initialiser: {vc in vc.updateJourney(from: stationFrom, to: stationTo, journey: journey)})
+        }
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let traintimes = traintimes {
             return Int(traintimes.journeys.size + 1)
@@ -116,7 +135,7 @@ extension ViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: customCellIdentifier) as! JourneyCell
         if indexPath.row > 0 {
-            cell.updateCell(traintimes!.journeys.get(index: Int32(indexPath.row - 1)) as! TrainTimes.Journey)
+            cell.updateCell(getJourney(indexPath.row))
         }
         return cell
     }
