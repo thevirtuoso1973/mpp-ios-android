@@ -28,6 +28,12 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V9W-Au-zBy">
+                                <rect key="frame" x="20" y="126" width="48" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Duration: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bjq-Lm-O34">
                                 <rect key="frame" x="20" y="200" width="75" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -46,8 +52,8 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Changes: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cJl-Yt-ctf">
-                                <rect key="frame" x="20" y="258" width="77" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Changes: " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cJl-Yt-ctf">
+                                <rect key="frame" x="20" y="258" width="77" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -59,12 +65,6 @@
                                     <action selector="doneButtonPressed:" destination="h9e-Bw-8fG" eventType="touchUpInside" id="7pf-eJ-7jC"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V9W-Au-zBy">
-                                <rect key="frame" x="20" y="126" width="48" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -89,11 +89,12 @@
                         <viewLayoutGuide key="safeArea" id="uev-WC-tGx"/>
                     </view>
                     <connections>
-                        <outlet property="changesLabel" destination="cJl-Yt-ctf" id="zKe-P5-zem"/>
+                        <outlet property="changesLabel" destination="cJl-Yt-ctf" id="yJ4-Vi-nNw"/>
                         <outlet property="doneButton" destination="TtE-XA-hEB" id="14c-l4-y2v"/>
                         <outlet property="durationLabel" destination="Bjq-Lm-O34" id="bbx-gk-0dZ"/>
                         <outlet property="fromLabel" destination="7if-2L-5hF" id="M2l-Qg-Nvr"/>
                         <outlet property="operatorLabel" destination="X1r-F5-qsj" id="Rvn-Jb-xkH"/>
+                        <outlet property="priceLabel" destination="V9W-Au-zBy" id="sqk-yF-35E"/>
                         <outlet property="statusLabel" destination="g4a-Vq-TZd" id="51t-ue-NLv"/>
                         <outlet property="toLabel" destination="70m-Xy-aVF" id="ltg-tf-0oh"/>
                     </connections>

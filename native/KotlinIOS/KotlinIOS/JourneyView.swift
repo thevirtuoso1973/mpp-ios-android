@@ -17,6 +17,7 @@ class JourneyView: UIViewController {
     @IBOutlet private var statusLabel: UILabel!
     @IBOutlet private var operatorLabel: UILabel!
     @IBOutlet private var changesLabel: UILabel!
+    @IBOutlet private var priceLabel: UILabel!
     @IBOutlet private var doneButton: UIButton!
     
     override func viewDidLoad() {
@@ -36,6 +37,7 @@ class JourneyView: UIViewController {
     func updateJourney(from: String, to: String, journey: TrainTimes.Journey) {
         fromLabel.text = "FROM: \(from)"
         toLabel.text = "TO: \(to)"
+        priceLabel.text = String(format: "Price: £%i.%02i", journey.price / 100, journey.price % 100)
         let departDate: Date = Date.init(timeIntervalSince1970: TimeInterval(journey.departureTime / 1000))
         let arrivalDate = Date.init(timeIntervalSince1970: TimeInterval(journey.arrivalTime / 1000))
         let duration = Calendar.current.dateComponents([.hour, .minute], from: departDate, to: arrivalDate)
@@ -43,11 +45,12 @@ class JourneyView: UIViewController {
         statusLabel.text = "Status: \(journey.status)"
         operatorLabel.text = "Primary operator: \(journey.trainOperator)"
         if (journey.changes.size > 0) {
-            changesLabel.text = "Changes: \n"
+            var changeText = "Changes: \n"
             for i in 0..<journey.changes.size {
                 let station = journey.changes.get(index: Int32(i)) as! ApiResult.JourneyStation
-                changesLabel.text! += station.name + "test\n"
+                changeText += "  " + station.name + "\n"
             }
+            changesLabel.text = changeText
         } else {
             changesLabel.text = "No changes."
         }

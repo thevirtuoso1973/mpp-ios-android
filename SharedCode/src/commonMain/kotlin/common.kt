@@ -69,7 +69,7 @@ fun ApiResult.toTrainTimes(): TrainTimes{
             journey.primaryTrainOperator.name,
             journey.legs.map {
                 leg -> leg.origin
-            }.drop(0).toTypedArray()
+            }.drop(1).toTypedArray()
         ))
     }
     return TrainTimes(
