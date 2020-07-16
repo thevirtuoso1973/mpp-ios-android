@@ -16,57 +16,65 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="First Station" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TDa-WC-Wnt">
-                                <rect key="frame" x="19" y="70" width="92" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="From:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TDa-WC-Wnt">
+                                <rect key="frame" x="81.5" y="90" width="44" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ktU-KD-1Nr">
-                                <rect key="frame" x="207" y="99" width="207" height="216"/>
+                                <rect key="frame" x="207" y="115" width="207" height="216"/>
                             </pickerView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Second Station" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3IR-3f-2eU">
-                                <rect key="frame" x="207" y="70" width="117" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3IR-3f-2eU">
+                                <rect key="frame" x="298.5" y="90" width="24" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ooy-Gg-0KB">
-                                <rect key="frame" x="0.0" y="99" width="207" height="216"/>
+                                <rect key="frame" x="0.0" y="115" width="207" height="216"/>
                             </pickerView>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" id="3PQ-1U-N4a">
                                 <rect key="frame" x="20" y="426" width="374" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </activityIndicatorView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mjD-hx-qWW">
-                                <rect key="frame" x="20" y="373" width="374" height="469"/>
+                                <rect key="frame" x="20" y="389" width="374" height="453"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <connections>
                                     <outlet property="dataSource" destination="BYZ-38-t0r" id="GjF-og-faz"/>
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gIg-JY-WSI">
-                                <rect key="frame" x="182.5" y="323" width="49" height="30"/>
+                                <rect key="frame" x="182.5" y="339" width="49" height="30"/>
                                 <state key="normal" title="Submit"/>
                                 <connections>
                                     <action selector="submitButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="PNT-qJ-zZ0"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Train Journey Planner" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P0z-Ls-P9i">
+                                <rect key="frame" x="91" y="44" width="232" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="TDa-WC-Wnt" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="26" id="GVJ-PZ-2Ip"/>
+                            <constraint firstItem="P0z-Ls-P9i" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="1qP-Ap-bgH"/>
+                            <constraint firstItem="TDa-WC-Wnt" firstAttribute="top" secondItem="P0z-Ls-P9i" secondAttribute="bottom" constant="16" id="EU5-KW-0aa"/>
+                            <constraint firstItem="3IR-3f-2eU" firstAttribute="top" secondItem="P0z-Ls-P9i" secondAttribute="bottom" constant="16" id="IOd-v9-iGl"/>
                             <constraint firstItem="mjD-hx-qWW" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="Ivs-Uu-fL1"/>
                             <constraint firstItem="gIg-JY-WSI" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="OLg-sE-wX6"/>
-                            <constraint firstItem="TDa-WC-Wnt" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="19" id="UPI-1z-vmt"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="mjD-hx-qWW" secondAttribute="bottom" constant="20" id="XiS-d1-EeP"/>
+                            <constraint firstItem="3IR-3f-2eU" firstAttribute="centerX" secondItem="ktU-KD-1Nr" secondAttribute="centerX" id="a0U-gX-J1B"/>
                             <constraint firstItem="Ooy-Gg-0KB" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="a7u-a3-joP"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ktU-KD-1Nr" secondAttribute="trailing" id="aZh-8T-PCJ"/>
-                            <constraint firstItem="ktU-KD-1Nr" firstAttribute="top" secondItem="3IR-3f-2eU" secondAttribute="bottom" constant="8" id="aoz-ya-sSM"/>
+                            <constraint firstItem="ktU-KD-1Nr" firstAttribute="top" secondItem="3IR-3f-2eU" secondAttribute="bottom" constant="4" id="aoz-ya-sSM"/>
                             <constraint firstItem="gIg-JY-WSI" firstAttribute="top" secondItem="ktU-KD-1Nr" secondAttribute="bottom" constant="8" id="ckr-fv-yOn"/>
-                            <constraint firstItem="3IR-3f-2eU" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="dTK-Kb-TFL"/>
-                            <constraint firstItem="Ooy-Gg-0KB" firstAttribute="top" secondItem="TDa-WC-Wnt" secondAttribute="bottom" constant="8" id="dUu-cu-MIm"/>
-                            <constraint firstItem="3IR-3f-2eU" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="26" id="hpG-wf-za1"/>
+                            <constraint firstItem="P0z-Ls-P9i" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="dFs-fO-7VW"/>
+                            <constraint firstItem="Ooy-Gg-0KB" firstAttribute="top" secondItem="TDa-WC-Wnt" secondAttribute="bottom" constant="4" id="dUu-cu-MIm"/>
+                            <constraint firstItem="TDa-WC-Wnt" firstAttribute="centerX" secondItem="Ooy-Gg-0KB" secondAttribute="centerX" id="gFx-Uu-MXf"/>
                             <constraint firstItem="Ooy-Gg-0KB" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="izR-q7-hQa"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="mjD-hx-qWW" secondAttribute="trailing" constant="20" id="l5L-UE-tm7"/>
                             <constraint firstItem="ktU-KD-1Nr" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="nSL-Ga-QZc"/>
