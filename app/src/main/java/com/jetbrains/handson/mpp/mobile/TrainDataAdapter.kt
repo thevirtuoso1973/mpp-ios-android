@@ -1,25 +1,22 @@
 package com.jetbrains.handson.mpp.mobile
 
 import android.annotation.SuppressLint
-import android.icu.util.TimeUnit
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.list_row.view.*
-import java.text.DateFormat
-import java.text.SimpleDateFormat
-import java.time.Instant
-import java.time.LocalDate
-import java.time.Period
-import java.time.format.DateTimeFormatter
 import java.util.*
 
 class TrainDataAdapter(private val dataSet: List<TrainTimes.Journey>) :
     RecyclerView.Adapter<TrainDataAdapter.MyViewHolder>() {
 
     // Provide a reference to the views for each data item
-    class MyViewHolder(private var view: View) : RecyclerView.ViewHolder(view) {
+    class MyViewHolder(var view: View) : RecyclerView.ViewHolder(view) {
+        var journey: TrainTimes.Journey? = null
+
         private fun getTimeString(hour: Int, min: Int): String {
             return "%02d:%02d".format(hour, min)
         }
@@ -29,6 +26,8 @@ class TrainDataAdapter(private val dataSet: List<TrainTimes.Journey>) :
             /*
             Not as clean as it could be due to the API level 23.
              */
+            journey = j
+
             view.changes.text = j.numberChanges.toString()
             view.price.text = "£${j.price/100}.%02d".format(j.price % 100)
 
@@ -78,10 +77,19 @@ class TrainDataAdapter(private val dataSet: List<TrainTimes.Journey>) :
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        if (position == 0) {
+        if (position == 0) { // the first position will be the heading
             holder.addTitle()
         } else {
             holder.addJourney(dataSet[position-1])
+            holder.view.setOnClickListener { view ->
+                val intent = Intent(view.context, JourneyDetailActivity::class.java)
+                intent.putExtra("status", holder.journey?.status)
+                intent.putExtra("primaryOperator", holder.journey?.trainOperator)
+                intent.putExtra("stationChangeNames", holder.journey?.changes?.map {
+                    it.name
+                }?.toTypedArray())
+                startActivity(view.context, intent, null)
+            }
         }
     }
 
