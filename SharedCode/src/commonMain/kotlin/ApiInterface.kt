@@ -121,12 +121,12 @@ data class ApiResult (
             val type: String,
             val mode: String, // Enum?
             val durationInMinutes: Int,
-            val departureDateTime: String,
-            val arrivalDateTime: String,
-            val status: String,
-            val trainOperator: TrainOperator,
+            val departureDateTime: String? = null,
+            val arrivalDateTime: String? = null,
+            val status: String? = null,
+            val trainOperator: TrainOperator? = null,
             // val trainFacilities: List<Facility>
-            val additionalFacilitiesInformation: String
+            val additionalFacilitiesInformation: String? = null
         )
     }
 }
