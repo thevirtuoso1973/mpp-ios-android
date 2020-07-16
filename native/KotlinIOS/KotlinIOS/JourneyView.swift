@@ -23,8 +23,10 @@ class JourneyView: UIViewController {
         super.viewDidLoad()
     }
     
-    static func showPopup(parent: UIViewController) {
+    static func showPopup(parent: UIViewController, initialiser: (JourneyView) -> ()) {
         if let popupViewController = UIStoryboard(name: "JourneyView", bundle: nil).instantiateViewController(withIdentifier: "JourneyViewController") as? JourneyView {
+            popupViewController.loadView() // Create labels etc. for initialiser
+            initialiser(popupViewController)
             parent.present(popupViewController, animated: true)
         } else {
             print("FAILED to instantiate")
@@ -44,7 +46,7 @@ class JourneyView: UIViewController {
             changesLabel.text = "Changes: \n"
             for i in 0..<journey.changes.size {
                 let station = journey.changes.get(index: Int32(i)) as! ApiResult.JourneyStation
-                changesLabel.text! += station.name + "\n"
+                changesLabel.text! += station.name + "test\n"
             }
         } else {
             changesLabel.text = "No changes."

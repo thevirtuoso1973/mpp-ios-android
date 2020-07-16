@@ -111,9 +111,10 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
         let journey = getJourney(indexPath.row)
-        print(journey.trainOperator)
-        JourneyView.showPopup(parent: self)
+        JourneyView.showPopup(parent: self,
+                              initialiser: {vc in vc.updateJourney(from: "Test1", to: "Test2", journey: journey)})
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
