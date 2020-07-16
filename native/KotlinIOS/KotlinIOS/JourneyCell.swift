@@ -20,8 +20,8 @@ class JourneyCell: UITableViewCell {
         priceLabel.text = journey.priceFormatted
         changesLabel.text = "\(journey.changes.size)"
         
-        departureLabel.text = journey.departureDateFormatted
-        arrivalLabel.text = journey.arrivalDateFormatted
+        departureLabel.text = journey.departureTimeFormatted
+        arrivalLabel.text = journey.arrivalTimeFormatted
     }
 
 }
