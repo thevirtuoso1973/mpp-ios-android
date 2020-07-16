@@ -1,7 +1,6 @@
 package com.jetbrains.handson.mpp.mobile
 
-import com.soywiz.klock.DateFormat
-import com.soywiz.klock.parse
+import com.soywiz.klock.*
 import io.ktor.client.HttpClient
 import io.ktor.client.features.json.JsonFeature
 import io.ktor.client.features.json.serializer.KotlinxSerializer
@@ -57,14 +56,37 @@ fun getPrice(tickets: List<ApiResult.Journey.Ticket>): Int {
     return tickets.map { it.priceInPennies }.sum()
 }
 
-fun ApiResult.toTrainTimes(): TrainTimes{
+fun toHumanReadableDate(epochMillis: Long, now: Long): String {
+    val date = DateTime.Companion.fromUnix(epochMillis / 1000)
+    val hourFormatter = DateFormat("HH:mm")
+    val dateFormatter = DateFormat("HH:mm dd/MM")
+    val now = DateTime.Companion.fromUnix(now / 1000)
+    val diff = date - now
+
+    // If now.day == date.day || diff < 12h
+    if (now.startOfDay == date.startOfDay || diff.hours < 12) {
+        // Display as HH:mm (in xx h/m)
+        val diffStr = if (diff.hours < 1) "${diff.minutes.toInt()} min" else "${diff.hours.toInt()} hr"
+        return "${hourFormatter.format(date)} (in $diffStr)"
+    }
+    return dateFormatter.format(date)
+}
+
+fun formatPrice(price: Int): String {
+    return "£${price/100}.${"${price % 100}".padStart(2, '0')}"
+}
+
+fun ApiResult.toTrainTimes(now: Long): TrainTimes{
     val journeys = mutableListOf<TrainTimes.Journey>()
+    val priceStr = "£%d.%02d"
     this.outboundJourneys.forEach { journey ->
         journeys.plusAssign(TrainTimes.Journey(
             getPrice(journey.tickets),
+            formatPrice(getPrice(journey.tickets)),
             getEpochMillisFromUTC(journey.departureTime),
             getEpochMillisFromUTC(journey.arrivalTime),
-            journey.legs.size-1,
+            toHumanReadableDate(getEpochMillisFromUTC(journey.departureTime), now),
+            toHumanReadableDate(getEpochMillisFromUTC(journey.arrivalTime), now),
             journey.status,
             journey.primaryTrainOperator.name,
             journey.legs.map {

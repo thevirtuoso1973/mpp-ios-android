@@ -18,6 +18,7 @@ class ApplicationPresenter: ApplicationContract.Presenter() {
 
     override fun onViewTaken(view: ApplicationContract.View) {
         this.viewRef = view
+        view.setLoading(true)
         launch {
             val apiResult = getAPIResponse<StationApiResult>(stationsEndpoint)
             if (apiResult != null) {
@@ -26,6 +27,7 @@ class ApplicationPresenter: ApplicationContract.Presenter() {
             } else {
                 view.createAlert("Couldn't retrieve stations.")
             }
+            view.setLoading(false)
         }
         view.setStations(stations)
     }
@@ -49,7 +51,7 @@ class ApplicationPresenter: ApplicationContract.Presenter() {
             val apiResult = getAPIResponse<ApiResult>(urlString)
             view.setLoading(false)
             if (apiResult != null) {
-                val trainTimes = apiResult.toTrainTimes()
+                val trainTimes = apiResult.toTrainTimes(view.getCurrentUnixTime())
                 view.displayTrainTimes(trainTimes)
                 if (trainTimes.journeys.isEmpty()) {
                     view.createAlert("No routes found")
