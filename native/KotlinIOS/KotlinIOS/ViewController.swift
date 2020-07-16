@@ -105,7 +105,12 @@ extension ViewController: ApplicationContractView {
     }
 }
 
-extension ViewController: UITableViewDataSource {
+extension ViewController: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let journey = traintimes?.journeys.get(index: Int32(indexPath.row)) as! TrainTimes.Journey
+        print(journey.trainOperator)
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let traintimes = traintimes {
             return Int(traintimes.journeys.size)
