@@ -56,15 +56,15 @@ fun getPrice(tickets: List<ApiResult.Journey.Ticket>): Int {
     return tickets.map { it.priceInPennies }.sum()
 }
 
-fun toHumanReadableDate(epochMillis: Long, now: Long): String {
-    val date = DateTime.Companion.fromUnix(epochMillis / 1000)
+fun toHumanReadableDate(epochMillis: Long, nowMillis: Long): String {
+    val date = DateTime.Companion.fromUnix(epochMillis)
     val hourFormatter = DateFormat("HH:mm")
     val dateFormatter = DateFormat("HH:mm dd/MM")
-    val now = DateTime.Companion.fromUnix(now / 1000)
+    val now = DateTime.Companion.fromUnix(nowMillis)
     val diff = date - now
 
     // If now.day == date.day || diff < 12h
-    if (now.startOfDay == date.startOfDay || diff.hours < 12) {
+    if (now.dayOfYear == date.dayOfYear || diff.hours < 12) {
         // Display as HH:mm (in xx h/m)
         val diffStr = if (diff.hours < 1) "${diff.minutes.toInt()} min" else "${diff.hours.toInt()} hr"
         return "${hourFormatter.format(date)} (in $diffStr)"
@@ -78,7 +78,6 @@ fun formatPrice(price: Int): String {
 
 fun ApiResult.toTrainTimes(now: Long): TrainTimes{
     val journeys = mutableListOf<TrainTimes.Journey>()
-    val priceStr = "£%d.%02d"
     this.outboundJourneys.forEach { journey ->
         journeys.plusAssign(TrainTimes.Journey(
             getPrice(journey.tickets),
