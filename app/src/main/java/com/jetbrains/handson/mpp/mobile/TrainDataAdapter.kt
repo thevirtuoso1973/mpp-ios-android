@@ -30,7 +30,7 @@ class TrainDataAdapter(private val dataSet: List<TrainTimes.Journey>) :
             Not as clean as it could be due to the API level 23.
              */
             view.changes.text = j.numberChanges.toString()
-            view.price.text = "£${j.price/100}.${j.price % 100}"
+            view.price.text = "£${j.price/100}.%02d".format(j.price % 100)
 
             val curr = System.currentTimeMillis()
             val departCalendar = Calendar.getInstance()
