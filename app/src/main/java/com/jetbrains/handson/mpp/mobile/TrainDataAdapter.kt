@@ -20,6 +20,8 @@ class TrainDataAdapter(private val dataSet: List<TrainTimes.Journey>) :
 
         @SuppressLint("SetTextI18n")
         fun addJourney(j: TrainTimes.Journey) {
+            journey = j
+
             view.changes.text = j.changes.size.toString()
             view.price.text = j.priceFormatted
 
