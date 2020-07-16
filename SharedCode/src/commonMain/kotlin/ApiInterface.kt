@@ -144,9 +144,11 @@ data class StationApiResult(val stations: List<Station>) {
 data class TrainTimes(val origin: String, val destination: String, val journeys: Array<Journey>) {
     data class Journey(
         val price: Int,
+        val priceFormatted: String,
         val departureTime: Long,
         val arrivalTime: Long,
-        val numberChanges: Int,
+        val departureTimeFormatted: String,
+        val arrivalTimeFormatted: String,
         val status: String,
         val trainOperator: String,
         val changes: Array<ApiResult.Journey.Station>

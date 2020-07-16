@@ -1,7 +1,6 @@
 package com.jetbrains.handson.mpp.mobile
 
-import com.soywiz.klock.DateFormat
-import com.soywiz.klock.parse
+import com.soywiz.klock.*
 import io.ktor.client.HttpClient
 import io.ktor.client.features.json.JsonFeature
 import io.ktor.client.features.json.serializer.KotlinxSerializer
@@ -13,6 +12,7 @@ import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonConfiguration
 
 data class AppSubmitResult(val stationFromIndex: Int, val stationToIndex: Int)
+data class DateFormatInfo(val now: Long, val secondsFromUTC: Long)
 
 var stations: Array<StationApiResult.Station> = arrayOf(StationApiResult.Station(
     "King's Cross", "KGX")
@@ -57,14 +57,37 @@ fun getPrice(tickets: List<ApiResult.Journey.Ticket>): Int {
     return tickets.map { it.priceInPennies }.sum()
 }
 
-fun ApiResult.toTrainTimes(): TrainTimes{
+fun toHumanReadableDate(epochMillis: Long, dateInfo: DateFormatInfo): String {
+    val date = DateTime.Companion.fromUnix(epochMillis)
+    val dateOffset = DateTime.Companion.fromUnix(epochMillis + dateInfo.secondsFromUTC * 1000)
+    val hourFormatter = DateFormat("HH:mm")
+    val dateFormatter = DateFormat("HH:mm dd/MM")
+    val now = DateTime.Companion.fromUnix(dateInfo.now)
+    val diff = date - now
+
+    // If now.day == date.day || diff < 12h
+    if (now.dayOfYear == date.dayOfYear || diff.hours < 12) {
+        // Display as HH:mm (in xx h/m)
+        val diffStr = if (diff.hours < 1) "${diff.minutes.toInt()} min" else "${diff.hours.toInt()} hr"
+        return "${hourFormatter.format(dateOffset)} (in $diffStr)"
+    }
+    return dateFormatter.format(dateOffset)
+}
+
+fun formatPrice(price: Int): String {
+    return "£${price/100}.${"${price % 100}".padStart(2, '0')}"
+}
+
+fun ApiResult.toTrainTimes(dateInfo: DateFormatInfo): TrainTimes{
     val journeys = mutableListOf<TrainTimes.Journey>()
     this.outboundJourneys.forEach { journey ->
         journeys.plusAssign(TrainTimes.Journey(
             getPrice(journey.tickets),
+            formatPrice(getPrice(journey.tickets)),
             getEpochMillisFromUTC(journey.departureTime),
             getEpochMillisFromUTC(journey.arrivalTime),
-            journey.legs.size-1,
+            toHumanReadableDate(getEpochMillisFromUTC(journey.departureTime), dateInfo),
+            toHumanReadableDate(getEpochMillisFromUTC(journey.arrivalTime), dateInfo),
             journey.status,
             journey.primaryTrainOperator.name,
             journey.legs.map {

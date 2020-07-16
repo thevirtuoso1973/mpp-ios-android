@@ -69,6 +69,13 @@ class MainActivity : AppCompatActivity(), ApplicationContract.View {
         return Date().time
     }
 
+    override fun getSecondsFromUtc(): Long {
+        val tz = TimeZone.getDefault()
+        val cal = GregorianCalendar.getInstance(tz)
+        val offsetMillis = tz.getOffset(cal.timeInMillis)
+        return (offsetMillis / 1000).toLong()
+    }
+
     private fun getStationFrom(): Int {
         val spinner: Spinner = findViewById(R.id.spinner_from)
         return spinner.selectedItemPosition
