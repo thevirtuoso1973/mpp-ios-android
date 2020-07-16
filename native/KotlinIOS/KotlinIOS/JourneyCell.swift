@@ -38,9 +38,9 @@ class JourneyCell: UITableViewCell {
         let now = Date()
         if (Calendar.current.isDate(date, inSameDayAs: now)) {
             let diff = Calendar.current.dateComponents([.hour, .minute], from: now, to: date)
-            let diffStr = (diff.hour! == 0) ? ("\(diff.minute!) min.") : String(format: "%i:%02i", diff.hour!, diff.minute!)
+            let diffStr = (diff.hour! == 0) ? ("\(diff.minute!) min.") : ("\(diff.hour!) hr.")
             return "\(hourFormatter.string(from: date)) (in \(diffStr))"
         }
-        return ""
+        return dateFormatter.string(from: date)
     }
 }
