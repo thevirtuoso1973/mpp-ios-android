@@ -88,8 +88,8 @@ data class ApiResult (
     ) {
         @Serializable
         data class Ticket (
-            val fareId: Int,
-            val ftot: String,
+            val fareId: Int? = null,
+            val ftot: String? = null,
             // val ticketOptionToken: String,
             val ticketType: String,
             val ticketClass: String,
@@ -114,12 +114,12 @@ data class ApiResult (
 
         @Serializable
         data class Leg(
-            val legId: String,
+            val legId: String? = null,
             //val rsid: String,
             val origin: Station,
             val destination: Station,
             val type: String,
-            val mode: String, // Enum?
+            val mode: String? = null, // Enum?
             val durationInMinutes: Int,
             val departureDateTime: String? = null,
             val arrivalDateTime: String? = null,
