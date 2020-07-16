@@ -1,7 +1,6 @@
 package com.jetbrains.handson.mpp.mobile
 
 import android.content.Intent
-import android.icu.lang.UCharacter
 import android.os.Bundle
 import android.view.View
 import android.widget.ArrayAdapter
@@ -70,12 +69,12 @@ class MainActivity : AppCompatActivity(), ApplicationContract.View {
         return Date().time
     }
 
-    fun getStationFrom(): Int {
+    private fun getStationFrom(): Int {
         val spinner: Spinner = findViewById(R.id.spinner_from)
         return spinner.selectedItemPosition
     }
 
-    fun getStationTo(): Int {
+    private fun getStationTo(): Int {
         val spinner: Spinner = findViewById(R.id.spinner_to)
         return spinner.selectedItemPosition
     }
