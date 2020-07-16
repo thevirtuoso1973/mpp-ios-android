@@ -48,11 +48,11 @@ class TrainDataAdapter(private val dataSet: List<TrainTimes.Journey>) :
             view.departureTime.text = "${getTimeString(
                 departCalendar.get(Calendar.HOUR_OF_DAY),
                 departCalendar.get(Calendar.MINUTE)
-            )} (in $diffDepart hours)"
+            )} (in ${if (diffDepart == 0L) "less than an hour" else "$diffDepart hours"})"
             view.arrivalTime.text = "${getTimeString(
                 arriveCalendar.get(Calendar.HOUR_OF_DAY),
                 arriveCalendar.get(Calendar.MINUTE)
-            )} (in $diffArrive hours)"
+            )} (in ${if (diffArrive == 0L) "less than an hour" else "$diffArrive hours"})"
         }
 
         @SuppressLint("SetTextI18n")
