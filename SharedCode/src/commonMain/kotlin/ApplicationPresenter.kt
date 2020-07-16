@@ -51,7 +51,9 @@ class ApplicationPresenter: ApplicationContract.Presenter() {
             val apiResult = getAPIResponse<ApiResult>(urlString)
             view.setLoading(false)
             if (apiResult != null) {
-                val trainTimes = apiResult.toTrainTimes(view.getCurrentUnixTime())
+                val trainTimes = apiResult.toTrainTimes(
+                    DateFormatInfo(view.getCurrentUnixTime(), view.getSecondsFromUtc())
+                )
                 view.displayTrainTimes(trainTimes)
                 if (trainTimes.journeys.isEmpty()) {
                     view.createAlert("No routes found")
