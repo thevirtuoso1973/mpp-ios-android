@@ -36,8 +36,9 @@ class JourneyCell: UITableViewCell {
         dateFormatter.dateFormat = "HH:mm dd/MM/yy"
         
         let now = Date()
-        if (Calendar.current.isDate(date, inSameDayAs: now)) {
-            let diff = Calendar.current.dateComponents([.hour, .minute], from: now, to: date)
+        let diff = Calendar.current.dateComponents([.hour, .minute], from: now, to: date)
+        // Use near-time formatting for current day, or <12 hours away
+        if (Calendar.current.isDate(date, inSameDayAs: now) || diff.hour! < 12) {
             let diffStr = (diff.hour! == 0) ? ("\(diff.minute!) min.") : ("\(diff.hour!) hr.")
             return "\(hourFormatter.string(from: date)) (in \(diffStr))"
         }
