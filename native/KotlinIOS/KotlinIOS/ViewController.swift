@@ -116,11 +116,13 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
-        let journey = getJourney(indexPath.row)
-        let stationFrom = stationPickerDelegate.getPickerOption(at: Int(getStationFrom()))
-        let stationTo = stationPickerDelegate.getPickerOption(at: Int(getStationTo()))
-        JourneyView.showPopup(parent: self,
-                              initialiser: {vc in vc.updateJourney(from: stationFrom, to: stationTo, journey: journey)})
+        if (indexPath.row > 0) {
+            let journey = getJourney(indexPath.row)
+            let stationFrom = traintimes!.origin
+            let stationTo = traintimes!.destination
+            JourneyView.showPopup(parent: self,
+                                  initialiser: {vc in vc.updateJourney(from: stationFrom, to: stationTo, journey: journey)})
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
