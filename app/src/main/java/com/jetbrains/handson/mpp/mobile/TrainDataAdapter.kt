@@ -20,7 +20,7 @@ class TrainDataAdapter(private val dataSet: List<TrainTimes.Journey>) :
             view.price.text = "£${j.price/100}.${j.price % 100}"
             val depart = Date(j.departureTime)
             val arrive = Date(j.arrivalTime)
-            val format = SimpleDateFormat.getDateTimeInstance()
+            val format = SimpleDateFormat.getTimeInstance()
             view.departureTime.text = format.format(depart)
             view.arrivalTime.text = format.format(arrive)
         }
