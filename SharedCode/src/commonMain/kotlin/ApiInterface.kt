@@ -140,31 +140,15 @@ data class StationApiResult(val stations: List<Station>) {
     )
 }
 
+@Suppress("ArrayInDataClass") // We're never gonna compare these, they're just for passing data.
 data class TrainTimes(val origin: String, val destination: String, val journeys: Array<Journey>) {
     data class Journey(
         val price: Int,
         val departureTime: Long,
         val arrivalTime: Long,
-        val numberChanges: Int
+        val numberChanges: Int,
+        val status: String,
+        val trainOperator: String,
+        val changes: Array<ApiResult.Journey.Station>
     )
-
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (other == null || this::class != other::class) return false
-
-        other as TrainTimes
-
-        if (origin != other.origin) return false
-        if (destination != other.destination) return false
-        if (!journeys.contentEquals(other.journeys)) return false
-
-        return true
-    }
-
-    override fun hashCode(): Int {
-        var result = origin.hashCode()
-        result = 31 * result + destination.hashCode()
-        result = 31 * result + journeys.contentHashCode()
-        return result
-    }
 }

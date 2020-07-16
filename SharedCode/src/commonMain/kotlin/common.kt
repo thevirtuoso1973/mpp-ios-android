@@ -64,11 +64,16 @@ fun ApiResult.toTrainTimes(): TrainTimes{
             getPrice(journey.tickets),
             getEpochMillisFromUTC(journey.departureTime),
             getEpochMillisFromUTC(journey.arrivalTime),
-            journey.legs.size-1
+            journey.legs.size-1,
+            journey.status,
+            journey.primaryTrainOperator.name,
+            journey.legs.map {
+                leg -> leg.origin
+            }.drop(0).toTypedArray()
         ))
     }
     return TrainTimes(
         this.outboundJourneys.firstOrNull()?.originStation?.name ?: "NONE",
-        this.outboundJourneys.lastOrNull()?.originStation?.name ?: "NONE",
+        this.outboundJourneys.lastOrNull()?.destinationStation?.name ?: "NONE",
         journeys.toTypedArray())
 }
