@@ -1,12 +1,18 @@
 package com.jetbrains.handson.mpp.mobile
 
 import android.annotation.SuppressLint
+import android.icu.util.TimeUnit
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.list_row.view.*
+import java.text.DateFormat
 import java.text.SimpleDateFormat
+import java.time.Instant
+import java.time.LocalDate
+import java.time.Period
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 class TrainDataAdapter(private val dataSet: List<TrainTimes.Journey>) :
@@ -14,22 +20,47 @@ class TrainDataAdapter(private val dataSet: List<TrainTimes.Journey>) :
 
     // Provide a reference to the views for each data item
     class MyViewHolder(private var view: View) : RecyclerView.ViewHolder(view) {
+        private fun getTimeString(hour: Int, min: Int): String {
+            return "%02d:%02d".format(hour, min)
+        }
+
         @SuppressLint("SetTextI18n")
         fun addJourney(j: TrainTimes.Journey) {
+            /*
+            Not as clean as it could be due to the API level 23.
+             */
             view.changes.text = j.numberChanges.toString()
             view.price.text = "£${j.price/100}.${j.price % 100}"
-            val depart = Date(j.departureTime)
-            val arrive = Date(j.arrivalTime)
-            val format = SimpleDateFormat.getTimeInstance()
-            view.departureTime.text = format.format(depart)
-            view.arrivalTime.text = format.format(arrive)
+
+            val curr = System.currentTimeMillis()
+            val departCalendar = Calendar.getInstance()
+            departCalendar.time = Date(j.departureTime)
+            val arriveCalendar = Calendar.getInstance()
+            arriveCalendar.time = Date(j.arrivalTime)
+
+            val diffDepart = java.util.concurrent.TimeUnit
+                .MILLISECONDS
+                .toHours(j.departureTime-curr)
+            val diffArrive = java.util.concurrent.TimeUnit
+                .MILLISECONDS
+                .toHours(j.arrivalTime-curr)
+
+            view.departureTime.text = "${getTimeString(
+                departCalendar.get(Calendar.HOUR_OF_DAY),
+                departCalendar.get(Calendar.MINUTE)
+            )} (in $diffDepart hours)"
+            view.arrivalTime.text = "${getTimeString(
+                arriveCalendar.get(Calendar.HOUR_OF_DAY),
+                arriveCalendar.get(Calendar.MINUTE)
+            )} (in $diffArrive hours)"
         }
+
         @SuppressLint("SetTextI18n")
         fun addTitle() {
             view.changes.text = "Changes"
             view.price.text = "Price"
-            view.departureTime.text = "Departure Time"
-            view.arrivalTime.text = "Arrival Time"
+            view.departureTime.text = "Departure"
+            view.arrivalTime.text = "Arrival"
         }
     }
 
