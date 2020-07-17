@@ -58,8 +58,8 @@ fun getPrice(tickets: List<ApiResult.Journey.Ticket>): Int {
 }
 
 fun toHumanReadableDate(epochMillis: Long, dateInfo: DateFormatInfo): String {
-    val date = DateTime.Companion.fromUnix(epochMillis)
-    val dateOffset = DateTime.Companion.fromUnix(epochMillis + dateInfo.secondsFromUTC * 1000)
+    val date = DateTime.fromUnix(epochMillis)
+    val dateOffset = DateTime.fromUnix(epochMillis + dateInfo.secondsFromUTC * 1000)
     val hourFormatter = DateFormat("HH:mm")
     val dateFormatter = DateFormat("HH:mm dd/MM")
     val now = DateTime.Companion.fromUnix(dateInfo.now)
@@ -68,10 +68,24 @@ fun toHumanReadableDate(epochMillis: Long, dateInfo: DateFormatInfo): String {
     // If now.day == date.day || diff < 12h
     if (now.dayOfYear == date.dayOfYear || diff.hours < 12) {
         // Display as HH:mm (in xx h/m)
-        val diffStr = if (diff.hours < 1) "${diff.minutes.toInt()} min" else "${diff.hours.toInt()} hr"
+        val diffStr = formatDiff(dateInfo.now, epochMillis)
         return "${hourFormatter.format(dateOffset)} (in $diffStr)"
     }
     return dateFormatter.format(dateOffset)
+}
+
+fun formatDiff(date1Millis: Long, date2Millis: Long): String {
+    val date1 = DateTime.fromUnix(date1Millis)
+    val date2 = DateTime.fromUnix(date2Millis)
+    val diff = date2 - date1
+    if (date1.dayOfYear == date2.dayOfYear || diff.hours < 12) {
+        if (diff.hours < 1) {
+            return "${diff.minutes.toInt()} min"
+        } else {
+            return "${diff.hours.toInt()}:${"${(diff.minutes.toInt() % 60)}".padStart(2, '0')}"
+        }
+    }
+    return ">1 day"
 }
 
 fun formatPrice(price: Int): String {
@@ -81,13 +95,17 @@ fun formatPrice(price: Int): String {
 fun ApiResult.toTrainTimes(dateInfo: DateFormatInfo): TrainTimes{
     val journeys = mutableListOf<TrainTimes.Journey>()
     this.outboundJourneys.forEach { journey ->
+        val departTimeMillis = getEpochMillisFromUTC(journey.departureTime)
+        val arriveTimeMillis = getEpochMillisFromUTC(journey.arrivalTime)
         journeys.plusAssign(TrainTimes.Journey(
             getPrice(journey.tickets),
             formatPrice(getPrice(journey.tickets)),
-            getEpochMillisFromUTC(journey.departureTime),
-            getEpochMillisFromUTC(journey.arrivalTime),
-            toHumanReadableDate(getEpochMillisFromUTC(journey.departureTime), dateInfo),
-            toHumanReadableDate(getEpochMillisFromUTC(journey.arrivalTime), dateInfo),
+            departTimeMillis,
+            arriveTimeMillis,
+            toHumanReadableDate(departTimeMillis),
+            toHumanReadableDate(arriveTimeMillis),
+            arriveTimeMillis - departTimeMillis,
+            formatDiff(departTimeMillis, arriveTimeMillis),
             journey.status,
             journey.primaryTrainOperator.name,
             journey.legs.map {

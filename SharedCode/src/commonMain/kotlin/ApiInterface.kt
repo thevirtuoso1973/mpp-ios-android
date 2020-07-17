@@ -149,6 +149,8 @@ data class TrainTimes(val origin: String, val destination: String, val journeys:
         val arrivalTime: Long,
         val departureTimeFormatted: String,
         val arrivalTimeFormatted: String,
+        val diffTime: Long,
+        val diffTimeFormatted: String,
         val status: String,
         val trainOperator: String,
         val changes: Array<ApiResult.Journey.Station>
