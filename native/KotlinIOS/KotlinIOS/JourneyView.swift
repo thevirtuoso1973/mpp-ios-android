@@ -38,10 +38,8 @@ class JourneyView: UIViewController {
         fromLabel.text = "FROM: \(from)"
         toLabel.text = "TO: \(to)"
         priceLabel.text = String(format: "Price: £%i.%02i", journey.price / 100, journey.price % 100)
-        let departDate: Date = Date.init(timeIntervalSince1970: TimeInterval(journey.departureTime / 1000))
-        let arrivalDate = Date.init(timeIntervalSince1970: TimeInterval(journey.arrivalTime / 1000))
-        let duration = Calendar.current.dateComponents([.hour, .minute], from: departDate, to: arrivalDate)
-        durationLabel.text = "Duration: \(String(format: "%i:%02i", duration.hour!, duration.minute!))"
+        
+        durationLabel.text = "Duration: \(journey.diffTimeFormatted)"
         statusLabel.text = "Status: \(journey.status)"
         operatorLabel.text = "Primary operator: \(journey.trainOperator)"
         if (journey.changes.size > 0) {
