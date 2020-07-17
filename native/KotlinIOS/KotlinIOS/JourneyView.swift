@@ -35,8 +35,8 @@ class JourneyView: UIViewController {
     }
     
     func updateJourney(from: String, to: String, journey: TrainTimes.Journey) {
-        fromLabel.text = "FROM: \(from)"
-        toLabel.text = "TO: \(to)"
+        fromLabel.text = "From: \(from)"
+        toLabel.text = "To: \(to)"
         priceLabel.text = String(format: "Price: £%i.%02i", journey.price / 100, journey.price % 100)
         
         durationLabel.text = "Duration: \(journey.diffTimeFormatted)"
