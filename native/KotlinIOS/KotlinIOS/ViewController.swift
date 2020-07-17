@@ -107,8 +107,10 @@ extension ViewController: ApplicationContractView {
     func setLoading(loading: Bool) {
         if loading {
             loadingView.startAnimating()
+            submitButton.isEnabled = false
         } else {
             loadingView.stopAnimating()
+            submitButton.isEnabled = true
         }
     }
 }
