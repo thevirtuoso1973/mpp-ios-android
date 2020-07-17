@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.ArrayAdapter
+import android.widget.Button
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -25,9 +26,15 @@ class MainActivity : AppCompatActivity(), ApplicationContract.View {
     var origin: String? = null
     var dest: String? = null
 
+    var stationsRetrieved = false
+
     @Suppress("UNUSED_PARAMETER")
     fun notifyPresenterSubmit(view: View) {
-        presenter.onSubmitPressed(AppSubmitResult(getStationFrom(), getStationTo()))
+        if (stationsRetrieved) {
+            presenter.onSubmitPressed(AppSubmitResult(getStationFrom(), getStationTo()))
+        } else {
+            presenter.onViewTaken(this)
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,10 +50,20 @@ class MainActivity : AppCompatActivity(), ApplicationContract.View {
         val divider = DividerItemDecoration(recyclerView.context, DividerItemDecoration.VERTICAL)
         recyclerView.addItemDecoration(divider)
 
+        val button = findViewById<Button>(R.id.button_submit)
+        if (stationsRetrieved) {
+            button.text = getString(R.string.submit)
+        } else {
+            button.text = "Get stations"
+        }
         presenter.onViewTaken(this)
     }
 
     override fun setStations(stations: Array<StationApiResult.Station>) {
+        val button = findViewById<Button>(R.id.button_submit)
+        button.text = getString(R.string.submit)
+        stationsRetrieved = true
+
         val arrayAdapter = ArrayAdapter<String>(this,
             android.R.layout.simple_spinner_dropdown_item,
             stations.map { it.name }
