@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">LNER Journey Times</string>
+    <string name="app_name">LNtrackER</string>
     <string name="submit">Submit</string>
     <string name="from">From:</string>
     <string name="to">To:</string>
