@@ -2,6 +2,7 @@ package com.jetbrains.handson.mpp.mobile
 
 import com.soywiz.klock.*
 import io.ktor.client.HttpClient
+import io.ktor.client.features.HttpTimeout
 import io.ktor.client.features.json.JsonFeature
 import io.ktor.client.features.json.serializer.KotlinxSerializer
 import io.ktor.client.request.get
@@ -30,6 +31,9 @@ suspend inline fun <reified T> getAPIResponse(apiUrl: String): T? {
         install(JsonFeature) {
             val jsonConfig = JsonConfiguration(ignoreUnknownKeys = true)
             serializer = KotlinxSerializer(Json(jsonConfig))
+        }
+        install(HttpTimeout) {
+            requestTimeoutMillis = 10000
         }
     }
     return try {
