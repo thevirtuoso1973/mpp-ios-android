@@ -2,7 +2,7 @@ import UIKit
 import SharedCode
 
 class PickerDelegate: NSObject, UIPickerViewDelegate, UIPickerViewDataSource {
-    private var pickerOptions: Array<String> = ["a", "b", "c"]
+    private var pickerOptions: Array<String> = []
     func PickerDelegate() {}
     
     func pickerView(_: UIPickerView, titleForRow: Int, forComponent: Int) -> String? {
@@ -39,6 +39,7 @@ class ViewController: UIViewController {
     
     private var traintimes: TrainTimes? = nil
     private let customCellIdentifier = "JOURNEY_CELL"
+    private var stationsLoaded = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,10 +53,17 @@ class ViewController: UIViewController {
         let nib = UINib(nibName: "JourneyCell", bundle: nil)
         resultTable.register(nib, forCellReuseIdentifier: customCellIdentifier)
         view.bringSubviewToFront(loadingView)
+        
+        submitButton.setTitle("Reload Stations", for: .normal)
     }
     
     @IBAction func submitButtonPressed(_ sender: Any) {
-        presenter.onSubmitPressed(result: AppSubmitResult(stationFromIndex: getStationFrom(), stationToIndex: getStationTo()))
+        if (stationsLoaded) {
+            presenter.onSubmitPressed(result: AppSubmitResult(stationFromIndex: getStationFrom(), stationToIndex: getStationTo()))
+        } else {
+            // Reload stations
+            presenter.onViewTaken(view: self)
+        }
     }
 }
 
@@ -94,6 +102,8 @@ extension ViewController: ApplicationContractView {
         stationPickerDelegate.setPickerOptions(newOptions: newStations)
         firstStationPicker.reloadAllComponents()
         secondStationPicker.reloadAllComponents()
+        submitButton.setTitle("Submit", for: .normal)
+        stationsLoaded = true
     }
     
     func getCurrentUnixTime() -> Int64 {
@@ -107,8 +117,10 @@ extension ViewController: ApplicationContractView {
     func setLoading(loading: Bool) {
         if loading {
             loadingView.startAnimating()
+            submitButton.isEnabled = false
         } else {
             loadingView.stopAnimating()
+            submitButton.isEnabled = true
         }
     }
 }

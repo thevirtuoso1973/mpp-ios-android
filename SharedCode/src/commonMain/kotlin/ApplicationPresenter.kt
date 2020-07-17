@@ -29,7 +29,6 @@ class ApplicationPresenter: ApplicationContract.Presenter() {
             }
             view.setLoading(false)
         }
-        view.setStations(stations)
     }
 
     override fun onSubmitPressed(result: AppSubmitResult) {
