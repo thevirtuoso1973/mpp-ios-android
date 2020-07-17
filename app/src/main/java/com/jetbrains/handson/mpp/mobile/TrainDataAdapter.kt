@@ -63,13 +63,7 @@ class TrainDataAdapter(private val dataSet: List<TrainTimes.Journey>) :
                 intent.putExtra("stationChangeNames", holder.journey?.changes?.map {
                     it.name
                 }?.toTypedArray())
-                val diff = holder.journey?.arrivalTime!! - holder.journey?.departureTime!!
-                val hours = TimeUnit.MILLISECONDS.toHours(diff)
-                val min = TimeUnit.MILLISECONDS.toMinutes(diff) - hours*60
-                intent.putExtra("duration", if (hours == 0L)
-                    "$min minutes"
-                else
-                    "$hours hours, $min minutes")
+                intent.putExtra("duration", holder.journey?.diffTimeFormatted)
                 startActivity(view.context, intent, null)
             }
         }
