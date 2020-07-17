@@ -68,21 +68,25 @@ fun toHumanReadableDate(epochMillis: Long, dateInfo: DateFormatInfo): String {
     // If now.day == date.day || diff < 12h
     if (now.dayOfYear == date.dayOfYear || diff.hours < 12) {
         // Display as HH:mm (in xx h/m)
-        val diffStr = formatDiff(dateInfo.now, epochMillis)
+        val diffStr = formatDiff(dateInfo.now, epochMillis, precise = false)
         return "${hourFormatter.format(dateOffset)} (in $diffStr)"
     }
     return dateFormatter.format(dateOffset)
 }
 
-fun formatDiff(date1Millis: Long, date2Millis: Long): String {
+fun formatDiff(date1Millis: Long, date2Millis: Long, precise: Boolean): String {
     val date1 = DateTime.fromUnix(date1Millis)
     val date2 = DateTime.fromUnix(date2Millis)
     val diff = date2 - date1
     if (date1.dayOfYear == date2.dayOfYear || diff.hours < 12) {
-        if (diff.hours < 1) {
-            return "${diff.minutes.toInt()} min"
+        return if (diff.hours < 1) {
+            "${diff.minutes.toInt()} min"
         } else {
-            return "${diff.hours.toInt()}:${"${(diff.minutes.toInt() % 60)}".padStart(2, '0')}"
+            if (precise) {
+                "${diff.hours.toInt()}:${"${(diff.minutes.toInt() % 60)}".padStart(2, '0')}"
+            } else {
+                "${diff.hours.toInt()} hr"
+            }
         }
     }
     return ">1 day"
@@ -105,7 +109,7 @@ fun ApiResult.toTrainTimes(dateInfo: DateFormatInfo): TrainTimes{
             toHumanReadableDate(departTimeMillis, dateInfo),
             toHumanReadableDate(arriveTimeMillis, dateInfo),
             arriveTimeMillis - departTimeMillis,
-            formatDiff(departTimeMillis, arriveTimeMillis),
+            formatDiff(departTimeMillis, arriveTimeMillis, precise = true),
             journey.status,
             journey.primaryTrainOperator.name,
             journey.legs.map {
