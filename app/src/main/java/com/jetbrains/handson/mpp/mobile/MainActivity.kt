@@ -98,5 +98,6 @@ class MainActivity : AppCompatActivity(), ApplicationContract.View {
 
     override fun setLoading(loading: Boolean) {
         progressBar.visibility = if (loading) View.VISIBLE else View.GONE
+        button_submit.isEnabled = !loading
     }
 }
