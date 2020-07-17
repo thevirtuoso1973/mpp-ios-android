@@ -14,6 +14,10 @@ class JourneyDetailActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.popup)
 
+        val origin = findViewById<TextView>(R.id.originView)
+        origin.text = "From: ${intent.getStringExtra("origin")}"
+        val destination = findViewById<TextView>(R.id.destinationView)
+        destination.text = "To: ${intent.getStringExtra("destination")}"
         val duration = findViewById<TextView>(R.id.duration)
         duration.text = "Duration: ${intent.getStringExtra("duration")}"
         val statusText = findViewById<TextView>(R.id.status)
@@ -26,6 +30,9 @@ class JourneyDetailActivity: AppCompatActivity() {
         if (stations != null) {
             listView.adapter = ArrayAdapter<String>(this, R.layout.simple_text, stations)
         }
+
+        println(intent.getStringExtra("origin"))
+        println(intent.getStringExtra("destination"))
 
         val done = findViewById<Button>(R.id.done_button)
         done.setOnClickListener {

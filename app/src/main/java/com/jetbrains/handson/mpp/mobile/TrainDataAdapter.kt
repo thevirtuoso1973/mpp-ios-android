@@ -1,6 +1,7 @@
 package com.jetbrains.handson.mpp.mobile
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +12,10 @@ import kotlinx.android.synthetic.main.list_row.view.*
 import java.util.*
 import java.util.concurrent.TimeUnit
 
-class TrainDataAdapter(private val dataSet: List<TrainTimes.Journey>) :
+class TrainDataAdapter(
+    private val dataSet: List<TrainTimes.Journey>,
+    var context: Context? = null
+) :
     RecyclerView.Adapter<TrainDataAdapter.MyViewHolder>() {
 
     // Provide a reference to the views for each data item
@@ -45,6 +49,7 @@ class TrainDataAdapter(private val dataSet: List<TrainTimes.Journey>) :
         val layout = LayoutInflater.from(parent.context)
             .inflate(R.layout.list_row, parent, false)
         // set the view's size, margins, paddings and layout parameters
+        context = parent.context
         return MyViewHolder(layout)
     }
 
@@ -64,6 +69,10 @@ class TrainDataAdapter(private val dataSet: List<TrainTimes.Journey>) :
                     it.name
                 }?.toTypedArray())
                 intent.putExtra("duration", holder.journey?.diffTimeFormatted)
+                if (context is MainActivity) {
+                    intent.putExtra("origin", (context as MainActivity).origin)
+                    intent.putExtra("destination", (context as MainActivity).dest)
+                }
                 startActivity(view.context, intent, null)
             }
         }

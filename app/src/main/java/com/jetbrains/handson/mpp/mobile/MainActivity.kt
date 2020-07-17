@@ -22,6 +22,9 @@ class MainActivity : AppCompatActivity(), ApplicationContract.View {
 
     private var data = mutableListOf<TrainTimes.Journey>()
 
+    var origin: String? = null
+    var dest: String? = null
+
     @Suppress("UNUSED_PARAMETER")
     fun notifyPresenterSubmit(view: View) {
         presenter.onSubmitPressed(AppSubmitResult(getStationFrom(), getStationTo()))
@@ -60,6 +63,9 @@ class MainActivity : AppCompatActivity(), ApplicationContract.View {
     }
 
     override fun displayTrainTimes(trainTimes: TrainTimes) {
+        origin = trainTimes.origin
+        dest = trainTimes.destination
+
         data.clear()
         data.addAll(trainTimes.journeys)
         viewAdapter.notifyDataSetChanged()
