@@ -5,9 +5,12 @@ import io.ktor.client.HttpClient
 import io.ktor.client.features.HttpTimeout
 import io.ktor.client.features.json.JsonFeature
 import io.ktor.client.features.json.serializer.KotlinxSerializer
+import io.ktor.client.features.logging.DEFAULT
+import io.ktor.client.features.logging.LogLevel
+import io.ktor.client.features.logging.Logger
+import io.ktor.client.features.logging.Logging
 import io.ktor.client.request.get
 import kotlinx.serialization.MissingFieldException
-import kotlinx.serialization.Serializable
 import kotlinx.serialization.UnstableDefault
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonConfiguration
@@ -28,6 +31,10 @@ fun getShortStationName(index: Int): String {
 @OptIn(UnstableDefault::class)
 suspend inline fun <reified T> getAPIResponse(apiUrl: String): T? {
     val client = HttpClient {
+        install(Logging) {
+            logger = Logger.DEFAULT
+            level = LogLevel.ALL
+        }
         install(JsonFeature) {
             val jsonConfig = JsonConfiguration(ignoreUnknownKeys = true)
             serializer = KotlinxSerializer(Json(jsonConfig))
